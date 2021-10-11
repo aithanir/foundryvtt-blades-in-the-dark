@@ -214,5 +214,27 @@
   "BITD.EffectWarning": "Managing Active Effects within an Owned Item is not currently supported by FoundryVTT and will be added in a subsequent update.",
 
   "BITD.Name": "Name",
-  "BITD.CampaignName": "Campaign Name"
+  "BITD.CampaignName": "Campaign Name",
+
+  "WOD.SkillsPhysique": "Physique",
+  "WOD.SkillsPhysiqueShort": "Physique",
+  "WOD.SkillsAssault": "Assault",
+  "WOD.SkillsFabricate": "Fabricate",
+  "WOD.SkillsFinesse": "Finesse",
+  "WOD.SkillsManeuver": "Maneuver",
+
+  "WOD.SkillsInsight": "Insight",
+  "WOD.SkillsInsightShort": "Insight",
+  "WOD.SkillsEsoteric": "Esoteric",
+  "WOD.SkillsMedical": "Medical",
+  "WOD.SkillsResearch": "Research",
+  "WOD.SkillsTradecraft": "Tradecraft",
+
+  "WOD.SkillsComposure": "Composure",
+  "WOD.SkillsComposureShort": "Composure",
+  "WOD.SkillsBureaucracy": "Bureaucracy",
+  "WOD.SkillsInfluence": "Influence",
+  "WOD.SkillsNetwork": "Network",
+  "WOD.SkillsStreetwise": "Streetwise"
+
 }
