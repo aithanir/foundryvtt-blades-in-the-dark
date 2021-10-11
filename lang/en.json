@@ -229,5 +229,32 @@
   "BITD.SlyFriends": "Sly Friends",
   "BITD.ShrewdFriends": "Shrewd Friends",
   "BITD.DarkServants": "Dark Servants",
-  "BITD.StrangeFriends": "Strange Friends"
+  "BITD.StrangeFriends": "Strange Friends",
+  
+  "WOD.Continuity": "Continuity",
+  "WOD.InjuryValue": "Injury Value",
+  "WOD.ShockValue": "Shock Value",
+  "WOD.DiscardCondition": "Discard Condition",
+  
+  "WOD.SkillsPhysique": "Physique",
+  "WOD.SkillsPhysiqueShort": "Physique",
+  "WOD.SkillsAssault": "Assault",
+  "WOD.SkillsFabricate": "Fabricate",
+  "WOD.SkillsFinesse": "Finesse",
+  "WOD.SkillsManeuver": "Maneuver",
+
+  "WOD.SkillsInsight": "Insight",
+  "WOD.SkillsInsightShort": "Insight",
+  "WOD.SkillsEsoteric": "Esoteric",
+  "WOD.SkillsMedical": "Medical",
+  "WOD.SkillsResearch": "Research",
+  "WOD.SkillsTradecraft": "Tradecraft",
+
+  "WOD.SkillsComposure": "Composure",
+  "WOD.SkillsComposureShort": "Composure",
+  "WOD.SkillsBureaucracy": "Bureaucracy",
+  "WOD.SkillsInfluence": "Influence",
+  "WOD.SkillsNetwork": "Network",
+  "WOD.SkillsStreetwise": "Streetwise"
+
 }

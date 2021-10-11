@@ -166,23 +166,19 @@
     <div id="character-{{actor._id}}-character-harm" class="character-harm">
       <table>
         <thead>
-          <th class="black-white" colspan="4">{{localize "BITD.Harm"}}</th>
+          <th class="black-white">{{localize "BITD.Harm"}}</th>
           <th class="black-white"><label>{{localize "BITD.Healing"}}</label></th>
           <th class="black-white">{{localize "BITD.Armor"}}</th>
         </thead>
         <tbody>
           <tr>
-            <td>3</td>
-            <td colspan="2">
-              <input type="text" id="character-{{actor._id}}-harm-3-1" name="data.harm.heavy.one" value="{{data.harm.heavy.one}}">
-            </td>
-            <td>{{localize "BITD.NeedHelp"}}</td>
-            <td rowspan="3">
+            <td>harm-items</td>
+            <td>
               <div id="character-{{actor._id}}-health-clock" class="character-health-clock">
                 {{{blades-clock "data.healing-clock" 4 data.healing-clock actor._id}}}
               </div>
             </td>
-            <td rowspan="3" id="character-{{actor._id}}-armor-uses" class="character-armor-uses">
+            <td id="character-{{actor._id}}-armor-uses" class="character-armor-uses">
               <div>
                 <label for="character-{{actor._id}}-armor-uses-armor">{{localize "BITD.Armor"}}</label>
                 <input id="character-{{actor._id}}-armor-uses-armor" type="checkbox" name="data.armor-uses.armor" {{checked data.armor-uses.armor}}>
@@ -196,26 +192,6 @@
                 <input id="character-{{actor._id}}-armor-uses-special" type="checkbox" name="data.armor-uses.special" {{checked data.armor-uses.special}}>
               </div>
             </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>
-              <input type="text" id="character-{{actor._id}}-harm-2-1" name="data.harm.medium.one" value="{{data.harm.medium.one}}">
-            </td>
-            <td>
-              <input type="text" id="character-{{actor._id}}-harm-2-2" name="data.harm.medium.two" value="{{data.harm.medium.two}}">
-            </td>
-            <td>-1D</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>
-              <input type="text" id="character-{{actor._id}}-harm-1-1" name="data.harm.light.one" value="{{data.harm.light.one}}">
-            </td>
-            <td>
-              <input type="text" id="character-{{actor._id}}-harm-1-2" name="data.harm.light.two" value="{{data.harm.light.two}}">
-            </td>
-            <td>{{localize "BITD.LessEffect"}}</td>
           </tr>
         </tbody>
       </table>
