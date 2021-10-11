@@ -46,71 +46,71 @@
       "special": 0
     },
     "attributes": {
+        "physique": {
+          "exp": 0,
+          "exp_max": 6,
+          "label": "WOD.SkillsPhysique",
+          "skills": {
+            "assault": {
+              "label": "WOD.SkillsAssault",
+              "value": 0
+            },
+            "fabricate": {
+              "label": "WOD.SkillsFabricate",
+              "value": 0
+            },
+            "finesse": {
+              "label": "WOD.SkillsFinesse",
+              "value": 0
+            },
+            "maneuver": {
+              "label": "WOD.SkillsManeuver",
+              "value": 0
+            }
+          }
+        },
         "insight": {
           "exp": 0,
           "exp_max": 6,
-          "label": "BITD.SkillsInsight",
+          "label": "WOD.SkillsInsight",
           "skills": {
-            "hunt": {
-              "label": "BITD.SkillsHunt",
+            "esoteric": {
+              "label": "WOD.SkillsEsoteric",
               "value": 0
             },
-            "study": {
-              "label": "BITD.SkillsStudy",
+            "medical": {
+              "label": "WOD.SkillsMedical",
               "value": 0
             },
-            "survey": {
-              "label": "BITD.SkillsSurvey",
+            "research": {
+              "label": "WOD.SkillsResearch",
               "value": 0
             },
-            "tinker": {
-              "label": "BITD.SkillsTinker",
+            "tradecraft": {
+              "label": "WOD.SkillsTradecraft",
               "value": 0
             }
           }
         },
-        "prowess": {
+        "composure": {
           "exp": 0,
           "exp_max": 6,
-          "label": "BITD.SkillsProwess",
+          "label": "WOD.SkillsComposure",
           "skills": {
-            "finesse": {
-              "label": "BITD.SkillsFinesse",
+            "bureaucracy": {
+              "label": "WOD.SkillsBureaucracy",
               "value": 0
             },
-            "prowl": {
-              "label": "BITD.SkillsProwl",
+            "influence": {
+              "label": "WOD.SkillsInfluence",
               "value": 0
             },
-            "skirmish": {
-              "label": "BITD.SkillsSkirmish",
+            "network": {
+              "label": "WOD.SkillsNetwork",
               "value": 0
             },
-            "wreck": {
-              "label": "BITD.SkillsWreck",
-              "value": 0
-            }
-          }
-        },
-        "resolve": {
-          "exp": 0,
-          "exp_max": 6,
-          "label": "BITD.SkillsResolve",
-          "skills": {
-            "attune": {
-              "label": "BITD.SkillsAttune",
-              "value": 0
-            },
-            "command": {
-              "label": "BITD.SkillsCommand",
-              "value": 0
-            },
-            "consort": {
-              "label": "BITD.SkillsConsort",
-              "value": 0
-            },
-            "sway": {
-              "label": "BITD.SkillsSway",
+            "streetwise": {
+              "label": "WOD.SkillsStreetwise",
               "value": 0
             }
           }
@@ -251,18 +251,18 @@
     "templates": ["default", "logic", "activatedEffect"],
     "experience_clues": [],
     "base_skills": {
-      "hunt": [0],
-      "study": [0],
-      "survey": [0],
-      "tinker": [0],
+      "assault": [0],
+      "fabricate": [0],
       "finesse": [0],
-      "prowl": [0],
-      "skirmish": [0],
-      "wreck": [0],
-      "attune": [0],
-      "command": [0],
-      "consort": [0],
-      "sway": [0]
+      "maneuver": [0],
+      "esoteric": [0],
+      "medical": [0],
+      "research": [0],
+      "tradecraft": [0],
+      "bureaucracy": [0],
+      "influence": [0],
+      "network": [0],
+      "streetwise": [0]
     }
   },
   "ability": {
