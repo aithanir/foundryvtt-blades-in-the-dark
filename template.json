@@ -278,12 +278,6 @@
   "ability": {
     "templates": ["ability", "logic", "activatedEffect"]
   },
-  "heritage": {
-    "templates": ["default", "activatedEffect"]
-  },
-  "background": {
-    "templates": ["default", "activatedEffect"]
-  },
   "vice": {
     "templates": ["default", "activatedEffect"]
   },
