@@ -1,12 +1,12 @@
 {
-  "name": "blades-in-the-dark",
-  "title": "Blades in the Dark",
-  "description": "Blades in the dark game system.",
-  "version": "3.11",
+  "name": "winter-of-discontent",
+  "title": "Winter of Discontent",
+  "description": "A Blades in the dark game system.",
+  "version": "0.1",
   "minimumCoreVersion": "0.8.5",
   "compatibleCoreVersion": "0.8.9",
   "templateVersion": 1,
-  "author": "megastruktur",
+  "author": "aithanir",
   "esmodules": [
     "module/blades.js"
   ],
@@ -18,36 +18,11 @@
       "lang": "en",
       "name": "English",
       "path": "lang/en.json"
-    },
-    {
-      "lang": "ru",
-      "name": "Russian",
-      "path": "lang/ru.json"
-    },
-    {
-      "lang": "es",
-      "name": "Spanish",
-      "path": "lang/es.json"
-    },
-    {
-      "lang": "pl",
-      "name": "Polish",
-      "path": "lang/pl.json"
-    },
-    {
-      "lang": "de",
-      "name": "Deutsch",
-      "path": "lang/de.json"
-    },
-    {
-      "lang": "pt",
-      "name": "Portuguese",
-      "path": "lang/pt.json"
     }
   ],
-  "url": "https://github.com/megastruktur/foundryvtt-blades-in-the-dark/",
-  "manifest": "https://raw.githubusercontent.com/megastruktur/foundryvtt-blades-in-the-dark/master/system.json",
-  "download": "https://github.com/megastruktur/foundryvtt-blades-in-the-dark/archive/3.11.zip",
+  "url": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/tree/winter-of-discontent/",
+  "manifest": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/blob/winter-of-discontent/system.json",
+  "download": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/archive/refs/tags/wod-3.11-0.1.zip",
   "packs": [
     {
       "name": "class",
