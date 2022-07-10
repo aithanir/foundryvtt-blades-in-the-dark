@@ -1,8 +1,9 @@
-# FoundryVTT Blades in the Dark character and crew sheets
+# FoundryVTT Blades in the Dark character and crew sheets, For Winter of Discontent Campaign setting
 
 If you like my work - send thanks to astromortis@gmail.com  :3
+Forked from the generous work of megastruktur.  Send thanks to astromortis@gmail.com  :3
+... or donations to https://www.donationalerts.com/r/megastruktur
 
-Contact Discord: `megastruktur#5704` in case you find any bugs or if you have any suggestions.
 
 ## Usage
 `"Item" - all classes, crew types, upgrades, items, abilities, upgrades, etc.`
@@ -18,24 +19,28 @@ Contact Discord: `megastruktur#5704` in case you find any bugs or if you have an
 - To add Custom abilities just add a new "Foundry Item" of the corresponding type and fill all the necessary info. Then drag it to the sheet or add via button on a sheet.
 
 Classes:
-- (C)  Cutter
-- (G)  Ghost
-- (H)  Hound
-- (Hu) Hull
-- (Le) Leech
-- (Lu) Lurk
-- (Sl) Slide
-- (Sp) Spider
-- (V)  Vampire
-- (W)  Whisper
+- (Aca) Academic
+- (Art) Artist
+- (Ath) Athlete
+- (Dil) Dilettante
+- (Doc) Doctor
+- (Ecc) Eccentric
+- (Fai) Faithful
+- (Inv) Investigator
+- (Mec) Mechanic
+- (Mil) Military
+- (Occ) Occultist
+- (Pro) Professional
+- (Sco) Scoundrel
+- (Wan) Wanderer
 
 Crew Types:
-- (A)  Assassins
-- (B)  Bravos
-- (C)  Cult
-- (H)  Hawkers
-- (Sh) Shadows
-- (Sm) Smugglers
+- (Cu) Cult
+- (Dm) Demi-Monde
+- (In) Investigators
+- (Ou) Outsiders
+- (Sg) Shadow Government
+- (Su) Survivors
 
 ## Screenshots
 
