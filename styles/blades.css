@@ -25,73 +25,63 @@
 /*
  * Custom Radio Round
  */
-@font-face {
+ @font-face {
   font-family: "Kirsty";
-  src: url("assets/fonts/Kirsty/Kirsty.ttf") format("truetype");
-  /* Safari, Android, iOS */
+  src: url("assets/fonts/Kirsty/Kirsty.ttf") format("truetype"); /* Safari, Android, iOS */
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Kirsty";
-  src: url("assets/fonts/Kirsty/KirstyBold.ttf") format("truetype");
-  /* Safari, Android, iOS */
+  src: url("assets/fonts/Kirsty/KirstyBold.ttf") format("truetype"); /* Safari, Android, iOS */
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
   font-family: "Kirsty";
-  src: url("assets/fonts/Kirsty/KirstyBoldItalic.ttf") format("truetype");
-  /* Safari, Android, iOS */
+  src: url("assets/fonts/Kirsty/KirstyBoldItalic.ttf") format("truetype"); /* Safari, Android, iOS */
   font-weight: bold;
   font-style: italic;
 }
 @font-face {
   font-family: "Kirsty";
-  src: url("assets/fonts/Kirsty/KirstyItalic.ttf") format("truetype");
-  /* Safari, Android, iOS */
+  src: url("assets/fonts/Kirsty/KirstyItalic.ttf") format("truetype"); /* Safari, Android, iOS */
   font-weight: normal;
   font-style: italic;
 }
 @font-face {
   font-family: "Crimson Text";
-  src: url("assets/fonts/CrimsonText/CrimsonText-Regular.ttf") format("truetype");
-  /* Safari, Android, iOS */
+  src: url("assets/fonts/CrimsonText/CrimsonText-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Crimson Text";
-  src: url("assets/fonts/CrimsonText/CrimsonText-Bold.ttf") format("truetype");
-  /* Safari, Android, iOS */
+  src: url("assets/fonts/CrimsonText/CrimsonText-Bold.ttf") format("truetype"); /* Safari, Android, iOS */
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
   font-family: "Crimson Text";
-  src: url("assets/fonts/CrimsonText/CrimsonText-BoldItalic.ttf") format("truetype");
-  /* Safari, Android, iOS */
+  src: url("assets/fonts/CrimsonText/CrimsonText-BoldItalic.ttf") format("truetype"); /* Safari, Android, iOS */
   font-weight: bold;
   font-style: italic;
 }
 @font-face {
   font-family: "Crimson Text";
-  src: url("assets/fonts/CrimsonText/CrimsonText-Italic.ttf") format("truetype");
-  /* Safari, Android, iOS */
+  src: url("assets/fonts/CrimsonText/CrimsonText-Italic.ttf") format("truetype"); /* Safari, Android, iOS */
   font-weight: normal;
   font-style: italic;
 }
 @font-face {
   font-family: "Crimson Text";
-  src: url("assets/fonts/CrimsonText/CrimsonText-SemiBold.ttf") format("truetype");
-  /* Safari, Android, iOS */
+  src: url("assets/fonts/CrimsonText/CrimsonText-SemiBold.ttf") format("truetype"); /* Safari, Android, iOS */
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: "Crimson Text";
-  src: url("assets/fonts/CrimsonText/CrimsonText-SemiBoldItalic.ttf") format("truetype");
-  /* Safari, Android, iOS */
+  src: url("assets/fonts/CrimsonText/CrimsonText-SemiBoldItalic.ttf") format("truetype"); /* Safari, Android, iOS */
   font-weight: 600;
   font-style: italic;
 }
@@ -1210,78 +1200,127 @@
 .blades-in-the-dark.actor.pc * .loadout .item-add-popup {
   margin-left: 10px;
 }
-.blades-in-the-dark.actor.pc * .teeth-experience,
-.blades-in-the-dark.actor.pc * .teeth-injury,
+.blades-in-the-dark.actor.pc * .teeth-experience {
+  display: flex;
+  /* Hide the browser's default checkbox */
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+.blades-in-the-dark.actor.pc * .teeth-experience label {
+  height: 30px;
+  width: 10px;
+  background-image: url("assets/teeth/stresstooth-red.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 5px;
+  transition: filter 0.1s;
+  cursor: pointer;
+}
+.blades-in-the-dark.actor.pc * .teeth-experience label:last-of-type {
+  margin-right: 0px;
+}
+.blades-in-the-dark.actor.pc * .teeth-experience label[for$="-0"] {
+  width: auto;
+  height: auto;
+  background-image: none !important;
+  color: #EEEFFF;
+}
+.blades-in-the-dark.actor.pc * .teeth-experience label[for$="-0"] i {
+  margin-top: 4px;
+}
+.blades-in-the-dark.actor.pc * .teeth-experience label:hover {
+  filter: brightness(0.8);
+  opacity: 0.9;
+}
+.blades-in-the-dark.actor.pc * .teeth-experience input {
+  display: none;
+}
+.blades-in-the-dark.actor.pc * .teeth-experience input:checked ~ label {
+  background-image: url("assets/teeth/stresstooth-halfgrey.png");
+}
+.blades-in-the-dark.actor.pc * .teeth-experience input:checked + label {
+  background-image: url("assets/teeth/stresstooth-red.png");
+}
+.blades-in-the-dark.actor.pc * .teeth-injury {
+  /* Hide the browser's default checkbox */
+  display: flow-root;
+  top: 0px;
+  right: 10px;
+}
+.blades-in-the-dark.actor.pc * .teeth-injury label {
+  height: 30px;
+  width: 10px;
+  background-image: url("assets/wod/injurytooth-red.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 5px;
+  cursor: not-allowed;
+}
+.blades-in-the-dark.actor.pc * .teeth-injury label:last-of-type {
+  margin-right: 0px;
+}
+.blades-in-the-dark.actor.pc * .teeth-injury label[for$="-0"] {
+  width: auto;
+  height: auto;
+  background-image: none !important;
+  color: #EEEFFF;
+}
+.blades-in-the-dark.actor.pc * .teeth-injury label[for$="-0"] i {
+  margin-top: 4px;
+}
+.blades-in-the-dark.actor.pc * .teeth-injury input {
+  display: none;
+}
+.blades-in-the-dark.actor.pc * .teeth-injury input:checked ~ label {
+  background-image: url("assets/wod/injurytooth-halfgrey.png");
+}
+.blades-in-the-dark.actor.pc * .teeth-injury input:checked + label {
+  background-image: url("assets/wod/injurytooth-red.png");
+}
+.blades-in-the-dark.actor.pc * .teeth-injury label {
+  margin-left: 5px;
+  margin-right: unset;
+  float: right;
+}
+.blades-in-the-dark.actor.pc * .teeth-injury label :last-of-type {
+  margin-left: 0px;
+}
 .blades-in-the-dark.actor.pc * .teeth-shock {
   display: flex;
   /* Hide the browser's default checkbox */
   top: 0px;
   right: 10px;
 }
-.blades-in-the-dark.actor.pc * .teeth-experience {
-  position: absolute;
-}
-.blades-in-the-dark.actor.pc * .teeth-experience label,
-.blades-in-the-dark.actor.pc * .teeth-injury label,
 .blades-in-the-dark.actor.pc * .teeth-shock label {
   height: 30px;
   width: 10px;
+  background-image: url("assets/wod/shocktooth-blue.png");
   background-repeat: no-repeat;
   background-size: contain;
   margin-right: 5px;
-  transition: filter 0.1s;
   cursor: not-allowed;
 }
-.blades-in-the-dark.actor.pc * .teeth-experience label,
-.blades-in-the-dark.actor.pc * .teeth-injury label {
-  background-image: url("assets/teeth/stresstooth-red.png");
-}
-.blades-in-the-dark.actor.pc * .teeth-shock label { 
-  background-image: url("assets/teeth/stresstooth-blue.png");
-}
-.blades-in-the-dark.actor.pc * .teeth-experience label{
-  cursor: pointer;
-}
-.blades-in-the-dark.actor.pc * .teeth-experience label:last-of-type
-.blades-in-the-dark.actor.pc * .teeth-injury label:last-of-type
 .blades-in-the-dark.actor.pc * .teeth-shock label:last-of-type {
   margin-right: 0px;
 }
-.blades-in-the-dark.actor.pc * .teeth-experience label[for$="-0"], 
-.blades-in-the-dark.actor.pc * .teeth-injury label[for$="-0"], 
 .blades-in-the-dark.actor.pc * .teeth-shock label[for$="-0"] {
   width: auto;
   height: auto;
   background-image: none !important;
   color: #EEEFFF;
 }
-.blades-in-the-dark.actor.pc * .teeth-experience label[for$="-0"] i, 
-.blades-in-the-dark.actor.pc * .teeth-injury label[for$="-0"] i, 
 .blades-in-the-dark.actor.pc * .teeth-shock label[for$="-0"] i {
   margin-top: 4px;
 }
-.blades-in-the-dark.actor.pc * .teeth-experience label:hover{
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-.blades-in-the-dark.actor.pc * .teeth-experience input,
-.blades-in-the-dark.actor.pc * .teeth-injury input,
 .blades-in-the-dark.actor.pc * .teeth-shock input {
   display: none;
 }
-.blades-in-the-dark.actor.pc * .teeth-experience input:checked ~ label, 
-.blades-in-the-dark.actor.pc * .teeth-injury input:checked ~ label {
-  background-image: url("assets/teeth/stresstooth-halfgrey.png"); 
-}
-.blades-in-the-dark.actor.pc * .teeth-experience input:checked + label 
-.blades-in-the-dark.actor.pc * .teeth-injury input:checked + label {
-  background-image: url("assets/teeth/stresstooth-red.png");
-}
 .blades-in-the-dark.actor.pc * .teeth-shock input:checked ~ label {
-  background-image: url("assets/teeth/stresstooth-halfgrey.png"); 
+  background-image: url("assets/wod/shocktooth-halfgrey.png");
 }
 .blades-in-the-dark.actor.pc * .teeth-shock input:checked + label {
-  background-image: url("assets/teeth/stresstooth-blue.png");
+  background-image: url("assets/wod/shocktooth-blue.png");
 }
 .blades-in-the-dark.actor.pc * .harm-armor {
   display: flex;
@@ -1658,6 +1697,4 @@
 }
 .items-to-add .tooltip:hover .tooltiptext {
   visibility: visible;
-}
-
 /*# sourceMappingURL=blades.css.map */

@@ -143,14 +143,24 @@ $hover-brightness: 0.8;
 
   // Injury teeth
   .teeth-injury {
-    @include toothradio(10px, 30px, "assets/teeth/stresstooth-halfgrey.png", "assets/teeth/stresstooth-red.png", false);
+    @include toothradio(10px, 30px, "assets/wod/injurytooth-halfgrey.png", "assets/wod/injurytooth-red.png", false);
+    display:flow-root;
     top: 0px;
     right: 10px;
+
+    label {
+      margin-left: 5px;
+      margin-right: unset;
+      float: right;
+      :last-of-type {
+        margin-left: 0px;
+      }
+    }
   }
 
   // Shock teeth
   .teeth-shock {
-    @include toothradio(10px, 30px, "assets/teeth/stresstooth-halfgrey.png", "assets/teeth/stresstooth-blue.png", false);
+    @include toothradio(10px, 30px, "assets/wod/shocktooth-halfgrey.png", "assets/wod/shocktooth-blue.png", false);
     top: 0px;
     right: 10px;
   }
