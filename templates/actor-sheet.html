@@ -134,6 +134,31 @@
   {{!-- Harm, Healing and Armor --}}
   <section id="character-{{actor._id}}-harm-armor" class="flex harm-armor">
     <div id="character-{{actor._id}}-character-harm" class="character-harm">
+
+      <div class="label-stripe">
+        {{#injurycounter data.harm.injury}}
+        <div id="character-{{actor._id}}-injury" class="teeth-injury">
+          <input type="radio" id="character-{{actor._id}}-injury-0" name="data.harm.injury" value="0">
+
+          {{#times_from_1 data.injury_max}}
+            <input type="radio" id="character-{{actor._id}}-injury-{{this}}" name="data.harm.injury" value="{{this}}" disabled>
+            <label for="character-{{actor._id}}-injury-{{this}}"></label>
+          {{/times_from_1}}          
+        </div>
+        {{/injurycounter}}
+        <p>Harm</p>
+        {{#shockcounter data.harm.shock}}        
+        <div id="character-{{actor._id}}-shock" class="teeth-shock">
+          <input type="radio" id="character-{{actor._id}}-shock-0" name="data.harm.shock" value="0">
+
+          {{#times_from_1 data.shock_max}}
+            <input type="radio" id="character-{{actor._id}}-shock-{{this}}" name="data.harm.shock" value="{{this}}" disabled>
+            <label for="character-{{actor._id}}-shock-{{this}}"></label>
+          {{/times_from_1}}   
+        </div>
+        {{/shockcounter }}        
+      </div>
+
       <table>
         <thead>
           <th class="black-white">{{localize "BITD.Harm"}}</th>

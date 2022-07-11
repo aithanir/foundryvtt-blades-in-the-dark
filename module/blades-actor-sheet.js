@@ -70,6 +70,27 @@ export class BladesActorSheet extends BladesSheet {
     
     data.load_levels = {"BITD.Light":"BITD.Light", "BITD.Normal":"BITD.Normal", "BITD.Heavy":"BITD.Heavy"};
 
+
+   
+    // Calculate Harm
+    let injury = 0;
+    let shock = 0;
+    let harm = {}
+    data.items.forEach(i =>{
+      if( i.type !== "harm_card") return;
+      injury += parseInt(i.data.injury_value);
+      shock += parseInt(i.data.shock_value);
+    });
+
+    // Sanity Check
+    if (injury < 0) { injury=0;}
+    if (injury > 4) { injury=4;}
+    data.data.harm.injury = String(injury);
+    if (shock < 0) { shock=0;}
+    if (shock > 4) { shock=4;}
+    data.data.harm.shock = String(shock);
+
+
     return data;
   }
 

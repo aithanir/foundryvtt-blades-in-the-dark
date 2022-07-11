@@ -141,6 +141,20 @@ $hover-brightness: 0.8;
     right: 10px;
   }
 
+  // Injury teeth
+  .teeth-injury {
+    @include toothradio(10px, 30px, "assets/teeth/stresstooth-halfgrey.png", "assets/teeth/stresstooth-red.png", false);
+    top: 0px;
+    right: 10px;
+  }
+
+  // Shock teeth
+  .teeth-shock {
+    @include toothradio(10px, 30px, "assets/teeth/stresstooth-halfgrey.png", "assets/teeth/stresstooth-blue.png", false);
+    top: 0px;
+    right: 10px;
+  }
+
   .harm-armor {
 
     display: flex;

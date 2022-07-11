@@ -106,6 +106,27 @@ Hooks.once("init", async function() {
 
   });
 
+  // Injury Counter
+  Handlebars.registerHelper('injurycounter', function(selected, options) {
+    let html = options.fn(this);
+    let count = selected
+    if (count > 4) count = 4;
+
+    const rgx = new RegExp(' value=\"' + count + '\"');
+    return html.replace(rgx, "$& checked=\"checked\"");
+
+  }); 
+  
+  // Shock Counter
+  Handlebars.registerHelper('shockcounter', function(selected, options) {
+    let html = options.fn(this);
+    let count = selected
+    if (count > 4) count = 4;
+    const rgx = new RegExp(' value=\"' + count + '\"');
+    return html.replace(rgx, "$& checked=\"checked\"");
+
+  });  
+
   // NotEquals handlebar.
   Handlebars.registerHelper('noteq', (a, b, options) => {
     return (a !== b) ? options.fn(this) : '';
