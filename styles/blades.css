@@ -25,7 +25,7 @@
 /*
  * Custom Radio Round
  */
- @font-face {
+@font-face {
   font-family: "Kirsty";
   src: url("assets/fonts/Kirsty/Kirsty.ttf") format("truetype"); /* Safari, Android, iOS */
   font-weight: normal;
@@ -1243,6 +1243,7 @@
   background-image: url("assets/teeth/stresstooth-red.png");
 }
 .blades-in-the-dark.actor.pc * .teeth-injury {
+  display: flex;
   /* Hide the browser's default checkbox */
   display: flow-root;
   top: 0px;
@@ -1697,4 +1698,23 @@
 }
 .items-to-add .tooltip:hover .tooltiptext {
   visibility: visible;
-/*# sourceMappingURL=blades.css.map */
+}
+
+.harm-card-list img {
+  border: none;
+}
+.harm-card-list .tooltip .tooltiptext {
+  visibility: hidden;
+  color: var(--color-text-light-highlight);
+  background-color: var(--color-text-dark-secondary);
+  font-style: italic;
+  text-align: left;
+  padding: 5px;
+  border: 2px solid var(--color-border-highlight);
+  border-radius: 6px;
+  position: absolute;
+  z-index: 9999;
+}
+.harm-card-list .tooltip:hover .tooltiptext {
+  visibility: visible;
+}/*# sourceMappingURL=blades.css.map */

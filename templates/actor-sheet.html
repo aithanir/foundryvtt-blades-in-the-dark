@@ -167,7 +167,20 @@
         </thead>
         <tbody>
           <tr>
-            <td>harm-items</td>
+            <td>
+              <div id="character-{{actor._id}}-harm-list" class="harm-card-list">
+                {{#each actor.items as |item id|}}
+                {{#if (eq item.type "harm_card")}}
+                  <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                    <div class="item-body flex-horizontal">
+                      <img src="{{item.img}}" title="{{item.name}}" width="20" height="20"/>                    
+                      <div class="item-name tooltip">{{item.name}}<span class="tooltiptext">{{{item.data.description}}}</span></div>
+                    </div>
+                  </div>
+                {{/if}}
+                {{/each}}
+              </div>              
+            </td>
             <td>
               <div id="character-{{actor._id}}-health-clock" class="character-health-clock">
                 {{{blades-clock "data.healing-clock" 4 data.healing-clock actor._id}}}

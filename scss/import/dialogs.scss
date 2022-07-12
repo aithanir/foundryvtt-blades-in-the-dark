@@ -37,3 +37,34 @@
     }
   }
 }
+
+.harm-card-list {
+
+ //Remove item image border to be show image shape.
+ img {
+  border: none;
+ }
+
+ //Tooltip.
+ .tooltip {
+
+  .tooltiptext {
+    visibility: hidden;
+    color: var(--color-text-light-highlight);
+    background-color: var(--color-text-dark-secondary);    
+    font-style: italic;
+    text-align: left;
+    padding: 5px;
+    border: 2px solid var(--color-border-highlight);    
+    border-radius: 6px;
+
+    // Position
+    position: absolute;
+    z-index: 9999;
+  }
+
+  &:hover .tooltiptext {
+    visibility: visible;
+  }
+}  
+}
