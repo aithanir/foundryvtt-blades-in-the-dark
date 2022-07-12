@@ -276,11 +276,15 @@
   },
   "harm_card": {
     "templates": ["default","activatedEffect"],
+    "scale": 0,
     "name": "",
     "continuity": false,
     "injury_value": 0,
     "shock_value": 0,
-    "scale": 1,
+    "treatment": {
+      "position": 0,
+      "clock": 4
+    },
     "discard_condition": ""   
   },
   "cohort": {

@@ -11,16 +11,19 @@
       {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
     </section>
 
-    <div class="flex-vertical">
+    <div class="flex-vertical">   
+      <input id="harm-scale" type="text" name="data.scale" value="{{data.scale}}" placeholder="{{localize 'WOD.Scale'}}">
+      <label class="label-stripe">{{localize "WOD.Scale"}}</label> 
+      <input id="continuity" type="text" name="data.continuity" value="{{data.continuity}}" placeholder="{{localize 'WOD.Continuity'}}">
       <label class="label-stripe">{{localize "WOD.Continuity"}}</label>
-      <input id="continuity" type="text" name="data.continuity" value="{{data.continuity}}" placeholder="{{localize 'BITD.Continuity'}}">
-      <label class="label-stripe">{{localize "WOD.InjuryValue"}}</label>
       <input id="injury-value" type="text" name="data.injury_value" value="{{data.injury_value}}" placeholder="{{localize 'WOD.InjuryValue'}}">
-      <label class="label-stripe">{{localize "WOD.ShockValue"}}</label>
+      <label class="label-stripe">{{localize "WOD.InjuryValue"}}</label>
       <input id="shock-value" type="text" name="data.shock_value" value="{{data.shock_value}}" placeholder="{{localize 'WOD.ShockValue'}}">
-      <label class="label-stripe">{{localize "BITD.Scale"}}</label>
-      <input id="harm-scale" type="text" name="data.scale" value="{{data.scale}}" placeholder="{{localize 'BITD.Scale'}}">
-      <div class="label-stripe">{{localize "WOD.DiscardCondition"}}</div>
+      <label class="label-stripe">{{localize "WOD.ShockValue"}}</label>
+      <input id="harm-treatment-position" type="text" name="data.treatment.position" value="{{data.treatment.position}}" placeholder="{{localize 'WOD.Treatment.Position'}}">
+      <label class="label-stripe">{{localize "WOD.Treatment.Position"}}</label>
+      <input id="harm-treatment-clock" type="text" name="data.treatment.clock" value="{{data.treatment.clock}}" placeholder="{{localize 'WOD.Treatment.Clock'}}">
+      <div class="label-stripe">{{localize "WOD.Treatment.Clock"}}</div>
       <textarea name="data.discard_condition">{{{data.discard_condition}}}</textarea>      
       {{#if isGM}}
         <div class="label-stripe">{{localize "BITD.Effects"}}</div>
