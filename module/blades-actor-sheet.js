@@ -33,6 +33,19 @@ export class BladesActorSheet extends BladesSheet {
     // Prepare active effects
     data.effects = BladesActiveEffect.prepareActiveEffectCategories(this.actor.effects);
 
+
+    // Note any ability that affect actor data
+    // @todo - fix translation.
+    let mule_present, enhanced_injury_limit, enhanced_shock_limit;
+
+
+    data.items.forEach(i => {
+      if (i.type == "ability"){
+        if (i.name == "(C) Mule") {mule_present = true;}
+        if (i.name == "Bound in Darkness") {enhanced_shock_limit = true;}
+      }
+    });
+
     // Calculate Load
     let loadout = 0;
     data.items.forEach(i => {loadout += (i.type === "item") ? parseInt(i.data.load) : 0});
@@ -43,8 +56,7 @@ export class BladesActorSheet extends BladesSheet {
 			"BITD.Encumbered","BITD.Encumbered","BITD.OverMax"];
     let mule_level=["BITD.Light","BITD.Light","BITD.Light","BITD.Light","BITD.Light","BITD.Light","BITD.Normal","BITD.Normal",
 			"BITD.Heavy","BITD.Encumbered","BITD.OverMax"];
-    let mule_present=0;
- 
+    
     //Sanity Check
     if (loadout < 0) {
       loadout = 0;
@@ -53,13 +65,7 @@ export class BladesActorSheet extends BladesSheet {
       loadout = 10;
     }
 
-    //look for Mule ability
-    // @todo - fix translation.
-    data.items.forEach(i => {
-      if (i.type == "ability" && i.name == "(C) Mule") {
-        mule_present = 1;
-      }
-    });
+
 
     //set encumbrance level
     if (mule_present) {
@@ -71,10 +77,13 @@ export class BladesActorSheet extends BladesSheet {
     data.load_levels = {"BITD.Light":"BITD.Light", "BITD.Normal":"BITD.Normal", "BITD.Heavy":"BITD.Heavy"};
 
 
-   
+
     // Calculate Harm
     let injury = 0;
     let shock = 0;
+    let injury_max = enhanced_injury_limit ? 5 : 4;
+    let shock_max = enhanced_shock_limit ? 5 : 4;
+
     let harm = {}
     data.items.forEach(i =>{
       if( i.type !== "harm_card") return;
@@ -82,14 +91,29 @@ export class BladesActorSheet extends BladesSheet {
       shock += parseInt(i.data.shock_value);
     });
 
-    // Sanity Check
+    // Sanity Check - Ensure injury/shock values are within expected range
     if (injury < 0) { injury=0;}
-    if (injury > 4) { injury=4;}
+    if (injury > injury_max) { injury=injury_max;}
     data.data.harm.injury = String(injury);
-    if (shock < 0) { shock=0;}
-    if (shock > 4) { shock=4;}
-    data.data.harm.shock = String(shock);
+    data.data.injury_max = injury_max;
 
+    if (shock < 0) { shock=0;}
+    if (shock > injury_max) { shock=injury_max;}
+    data.data.harm.shock = String(shock);
+    data.data.shock_max = shock_max;
+
+    // Sanity Check - Ensure recovery details match the recovery_card
+    //                Reset recovery if the card is missing or not a harm_card
+    let recovery = {...data.data.recovery};
+    let recovery_card = data.items.find(i => i._id === recovery.harmId && i.type === "harm_card")
+    if(recovery_card){
+      let treatment = recovery_card.data.treatment;
+      recovery.position = treatment.position;
+      recovery.clock = treatment.clock;
+    }else{
+      recovery = game.system.template.Actor.character.recovery;
+    }
+    data.data.recovery = recovery;
 
     return data;
   }
@@ -115,6 +139,13 @@ export class BladesActorSheet extends BladesSheet {
       const element = $(ev.currentTarget).parents(".item");
       await this.actor.deleteEmbeddedDocuments("Item", [element.data("itemId")]);
       element.slideUp(200, () => this.render(false));
+    });
+
+    // Recover from Harm Cards
+    html.find('.harm-card-recovery').click( async ev => {
+      const element = $(ev.currentTarget).parents(".item");
+      await this.actor.startRecovery(element.data("itemId"));
+      this.render(false)
     });
 
     // manage active effects

@@ -214,4 +214,44 @@ export class BladesActor extends Actor {
 
   /* -------------------------------------------- */
 
+  /**
+   * Support for harm_card recovery
+   */
+
+  async startRecovery(itemId){
+    let recovery = this.data.data.recovery;
+    if (!recovery) recovery = game.system.template.Actor.character.recovery;
+
+    const currentRecoveryCard = await this.getRecoveryCardId();
+    if(currentRecoveryCard){
+      console.warn(`Recovery: harmId ${currentRecoveryCard} is already in recovery`);
+      return;
+    }
+
+    let recovery_card = this.data.items.get(itemId);
+    if(!recovery_card || recovery_card.type != "harm_card") return; //Skip if we can't find the item or it's not a harm_card
+    
+    const treatment = recovery_card.data.data.treatment;
+    if (!treatment) return;  //Skip if no treatment on item
+
+    recovery.harmId = itemId;
+    recovery.position = treatment.position ?? "controlled";
+    recovery.clock = treatment.clock ?? 4;
+    recovery.progress = 0;
+    await this.update({"data.recovery": recovery},{"diff":false});
+    const one=1;
+  }
+
+  async getRecoveryCardId(){
+    let recovery = this.data.data.recovery;
+    let recovery_card = this.data.items.get(recovery.harmdId);
+    if(!recovery_card || recovery_card.type != "harm_card"){
+      await this.update({"data.recovery": game.system.template.Actor.character.recovery});
+    }
+    return recovery.hardId
+  }
+
+  async cancelRecovery(){
+      await this.update({"data.recovery": game.system.template.Actor.character.recovery});
+  }
 }

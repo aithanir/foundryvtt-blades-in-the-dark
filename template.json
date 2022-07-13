@@ -29,7 +29,13 @@
     "harm": {
       "injury": 0,
       "shock": 0
-    },    
+    },
+    "recovery": {
+      "harmId": null,
+      "position": "controlled",
+      "clock": [0],
+      "progress": [0]
+    }, 
     "healing-clock": [0],
     "injury_max": 4,
     "shock_max": 4,
@@ -282,7 +288,7 @@
     "injury_value": 0,
     "shock_value": 0,
     "treatment": {
-      "position": 0,
+      "position": "controlled",
       "clock": 4
     },
     "discard_condition": ""   

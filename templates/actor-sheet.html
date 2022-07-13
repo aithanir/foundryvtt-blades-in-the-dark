@@ -146,7 +146,7 @@
           {{/times_from_1}}          
         </div>
         {{/injurycounter}}
-        <p>Harm</p>
+        <p>{{localize "BITD.Harm"}}</p>
         {{#shockcounter data.harm.shock}}        
         <div id="character-{{actor._id}}-shock" class="teeth-shock">
           <input type="radio" id="character-{{actor._id}}-shock-0" name="data.harm.shock" value="0">
@@ -176,14 +176,31 @@
                       <img src="{{item.img}}" title="{{item.name}}" width="20" height="20"/>                    
                       <div class="item-name tooltip">{{item.name}}<span class="tooltiptext">{{{item.data.description}}}</span></div>
                     </div>
+                    <a class="item-control harm-card-recovery" title="{{localize 'WOD.TitleRecoverHarm'}}"><i class="fas fa-first-aid red"></i></a>                    
                   </div>
                 {{/if}}
                 {{/each}}
               </div>              
             </td>
-            <td>
+            <td>          
+              {{#if data.recovery.harmId}}
+              {{#with data.recovery as | recovery |}}
+              <div class="item flex-horizontal" data-item-id="{{harmId}}">
+                <div class="item-body flex-horizontal">
+                  <div>{{recovery.position}}</div>
+                  <div class="item-name">{{recovery.harmId}}</div>
+                </div>
+              </div>
               <div id="character-{{actor._id}}-health-clock" class="character-health-clock">
-                {{{blades-clock "data.healing-clock" 4 data.healing-clock actor._id}}}
+              {{#if recovery.clock}}
+              {{{blades-clock "recovery-clock" recovery.clock recovery.progress actor._id}}}
+              {{else}}
+              <p>Remove harm at the next interval</p>
+              {{/if}} 
+              {{/with}}                             
+              {{else}}                
+              <p>Seek treatment and heal your harm</p>
+              {{/if}}
               </div>
             </td>
             <td id="character-{{actor._id}}-armor-uses" class="character-armor-uses">
