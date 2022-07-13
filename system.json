@@ -22,7 +22,7 @@
   ],
   "url": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/tree/winter-of-discontent/",
   "manifest": "https://raw.githubusercontent.com/aithanir/foundryvtt-blades-in-the-dark/winter-of-discontent/system.json",
-  "download": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/archive/wod-3.11-0.8.zip",
+  "download": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/archive/wod-3.19-0.8.zip",
   "packs": [
     {
       "name": "class",
