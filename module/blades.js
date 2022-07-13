@@ -139,7 +139,7 @@ Hooks.once("init", async function() {
     if(!recovery_card) return html; //No need to continue if there is no harm card in recovery
 
     html += '<div class="item-body flex-horizontal">'  
-    html += `<div class="item-name">${recovery_card.name}</div>`
+    html += `<div class="item-name tooltip">${recovery_card.name}<span class="tooltiptext">${recovery_card.data.description}</span></div>`
     html += '</div>'
     if (recovery.clock === 0 || (recovery.clock == recovery.progress)){
       html += `<a class="item-control item-delete" title="${game.i18n.localize('WOD.Recovery.TitleCompleteRecovery')}"><i class="fas fa-trash"></i></a>`;

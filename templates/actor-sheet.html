@@ -132,8 +132,8 @@
   </div>
 
   {{!-- Harm, Healing and Armor --}}
-  <section id="character-{{actor._id}}-harm-armor" class="flex harm-armor">
-    <div id="character-{{actor._id}}-character-harm" class="character-harm">
+  <section id="character-{{actor._id}}-section-harm-recovery-armor" class="flex">
+    <div id="character-{{actor._id}}-character-harm" class="flex harm-recovery-armor">
 
       <div class="label-stripe">
         {{#injurycounter data.harm.injury}}
@@ -156,74 +156,66 @@
             <label for="character-{{actor._id}}-shock-{{this}}"></label>
           {{/times_from_1}}   
         </div>
-        {{/shockcounter }}        
+        {{/shockcounter }}
       </div>
-
-      <table>
-        <thead>
-          <th class="black-white">{{localize "BITD.Harm"}}</th>
-          <th class="black-white"><label>{{localize "BITD.Healing"}}</label></th>
-          <th class="black-white">{{localize "BITD.Armor"}}</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div id="character-{{actor._id}}-harm-list" class="harm-card-list">
-                {{#with actor as |actor|}}
-                {{#each actor.items as |item id|}}
-                {{#if (eq item.type "harm_card")}}
-                  <div class="item flex-horizontal" data-item-id="{{item._id}}">
-                    <div class="item-body flex-horizontal">
-                      <img src="{{item.img}}" title="{{item.name}}" width="20" height="20"/>                    
-                      <div class="item-name tooltip">{{item.name}}<span class="tooltiptext">{{{item.data.description}}}</span></div>
-                    </div>
-                    {{#if (not_in_recovery actor)}}
-                    <a class="item-control harm-card-recovery" title="{{localize 'WOD.TitleRecoverHarm'}}"><i class="fas fa-first-aid"></i></a>
-                    {{/if}}
-                  </div>
+      <div  id="character-{{actor._id}}-harm-recovery-armor" class="flex character-harm-recovery-armor">
+        <div id="character-{{actor._id}}-harm" class="character-harm">
+          <div id="character-{{actor._id}}-harm-list" class="harm-card-list">
+            {{#with actor as |actor|}}
+            {{#each actor.items as |item id|}}
+            {{#if (eq item.type "harm_card")}}
+              <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                <div class="item-body flex-horizontal">
+                  <img src="{{item.img}}" title="{{item.name}}" width="20" height="20"/>                    
+                  <div class="item-name tooltip">{{item.name}}<span class="tooltiptext">{{{item.data.description}}}</span></div>
+                </div>
+                {{#if (not_in_recovery actor)}}
+                <a class="item-control harm-card-recovery" title="{{localize 'WOD.TitleRecoverHarm'}}"><i class="fas fa-first-aid"></i></a>
                 {{/if}}
-                {{/each}}
-                {{/with}}
-              </div>              
-            </td>
-            <td>          
-              {{#if data.recovery.harmId}}
-              <div class="item flex-horizontal" data-item-id="{{data.recovery.harmId}}">
-                {{#recovery_harm_card}}{{/recovery_harm_card}}
               </div>
-              {{#if (recover_next_interval data.recovery)}}
-              <p>{{localize 'WOD.Recovery.NextInterval'}}</p>
-              {{else if data.recovery.clock}}
-              {{#if (eq data.recovery.clock data.recovery.progress)}}
-              <p>{{localize 'WOD.Recovery.RecoveryComplete'}}</p>
-              {{else}}
-              <p style="text-transform: capitalize">{{data.recovery.position}} recovery.</p>       
-              <div id="character-{{actor._id}}-health-clock" class="character-health-clock clocks-{{data.recovery.clock}}">
-              {{{blades-clock "data.recovery.progress" data.recovery.clock data.recovery.progress actor._id}}}
-              </div>
-              {{/if}}               
-              {{/if}}
-              {{else if (has_harm actor)}}                
-              <p>{{localize 'WOD.Recovery.SeekTreatment'}}</p>              
-              {{/if}}
-            </td>
-            <td id="character-{{actor._id}}-armor-uses" class="character-armor-uses">
-              <div>
-                <label for="character-{{actor._id}}-armor-uses-armor">{{localize "BITD.Armor"}}</label>
-                <input id="character-{{actor._id}}-armor-uses-armor" type="checkbox" name="data.armor-uses.armor" {{checked data.armor-uses.armor}}>
-              </div>
-              <div>
-                <label for="character-{{actor._id}}-armor-uses-heavy">{{localize "BITD.Heavy"}}</label>
-                <input id="character-{{actor._id}}-armor-uses-heavy" type="checkbox" name="data.armor-uses.heavy" {{checked data.armor-uses.heavy}}>
-              </div>
-              <div>
-                <label for="character-{{actor._id}}-armor-uses-special">{{localize "BITD.Special"}}</label>
-                <input id="character-{{actor._id}}-armor-uses-special" type="checkbox" name="data.armor-uses.special" {{checked data.armor-uses.special}}>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            {{/if}}
+            {{/each}}
+            {{/with}}
+          </div>  
+        </div>
+        <div id="character-{{actor._id}}-recovery" class="character-recovery">
+          {{#if data.recovery.harmId}}
+          <div id="character-{{actor._id}}-harm-list" class="harm-card-list">             
+          <div class="item flex-horizontal" data-item-id="{{data.recovery.harmId}}">
+            {{#recovery_harm_card}}{{/recovery_harm_card}}
+          </div>
+          </div>
+          {{#if (recover_next_interval data.recovery)}}
+          <p>{{localize 'WOD.Recovery.NextInterval'}}</p>
+          {{else if data.recovery.clock}}
+          {{#if (eq data.recovery.clock data.recovery.progress)}}
+          <p>{{localize 'WOD.Recovery.RecoveryComplete'}}</p>
+          {{else}}
+          <p style="text-transform: capitalize">{{data.recovery.position}} recovery.</p>       
+          <div id="character-{{actor._id}}-health-clock" class="character-health-clock clocks-{{data.recovery.clock}}">
+          {{{blades-clock "data.recovery.progress" data.recovery.clock data.recovery.progress actor._id}}}
+          </div>
+          {{/if}}               
+          {{/if}}
+          {{else if (has_harm actor)}}                
+          <p>{{localize 'WOD.Recovery.SeekTreatment'}}</p>              
+          {{/if}}
+        </div>
+        <div id="character-{{actor._id}}-armor" class="character-armor">
+          <div>
+            <label for="character-{{actor._id}}-armor-uses-armor">{{localize "BITD.Armor"}}</label>
+            <input id="character-{{actor._id}}-armor-uses-armor" type="checkbox" name="data.armor-uses.armor" {{checked data.armor-uses.armor}}>
+          </div>
+          <div>
+            <label for="character-{{actor._id}}-armor-uses-heavy">{{localize "BITD.Heavy"}}</label>
+            <input id="character-{{actor._id}}-armor-uses-heavy" type="checkbox" name="data.armor-uses.heavy" {{checked data.armor-uses.heavy}}>
+          </div>
+          <div>
+            <label for="character-{{actor._id}}-armor-uses-special">{{localize "BITD.Special"}}</label>
+            <input id="character-{{actor._id}}-armor-uses-special" type="checkbox" name="data.armor-uses.special" {{checked data.armor-uses.special}}>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 

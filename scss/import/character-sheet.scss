@@ -165,49 +165,54 @@ $hover-brightness: 0.8;
     right: 10px;
   }
 
-  .harm-armor {
+  .harm-recovery-armor {
+    width: 100%;
 
-    display: flex;
-
-    // Harm
-    .character-harm {
-
-      width: 100%;
-
-      table {
-        width: 100%;
-
-        th {
-          background-color: $almost_black;
-          color: $almost_white;
-        }
-
-        input[type="text"] {
-          width: 100%;
-        }
-      }
+    .label-stripe {
+      margin-bottom: 0;
     }
+    
+    .character-harm-recovery-armor {
+      display: flex;
+      border-collapse: collapse;
+      background: rgba(0, 0, 0, 0.05);
+      border-top: 1px solid var(--color-border-light-tertiary);
+      border-bottom: 1px solid var(--color-border-light-tertiary);
+      padding: 1em;
+      margin: 0 0 1em 0;
 
-    // Clock
-    .character-health-clock {
-      margin: 0 auto;
-      &.clocks-4 {
-        @include clock(4, 88);
+      .character-harm,
+      .character-recovery{
+        flex: 2;
       }
-      &.clocks-6 {
-        @include clock(6, 88);
-      }
-      &.clocks-8 {
-        @include clock(8, 88);
-      }
-    }
 
-    .character-armor-uses {
+      .character-armor {
+        flex: 1;
 
-      div {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        .character-armor-uses {
+  
+          div {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          }
+        }         
+      }
+  
+      .character-recovery {
+        // Clock
+        .character-health-clock {
+          margin: 0 auto;
+          &.clocks-4 {
+            @include clock(4, 88);
+          }
+          &.clocks-6 {
+            @include clock(6, 88);
+          }
+          &.clocks-8 {
+            @include clock(8, 88);
+          }
+        }
       }
     }
   }

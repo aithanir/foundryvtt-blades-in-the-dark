@@ -1323,188 +1323,194 @@
 .blades-in-the-dark.actor.pc * .teeth-shock input:checked + label {
   background-image: url("assets/wod/shocktooth-blue.png");
 }
-.blades-in-the-dark.actor.pc * .harm-armor {
+.blades-in-the-dark.actor.pc * .harm-recovery-armor {
+  width: 100%;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .label-stripe {
+  margin-bottom: 0;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor {
   display: flex;
+  border-collapse: collapse;
+  background: rgba(0, 0, 0, 0.05);
+  border-top: 1px solid var(--color-border-light-tertiary);
+  border-bottom: 1px solid var(--color-border-light-tertiary);
+  padding: 1em;
+  margin: 0 0 1em 0;
 }
-.blades-in-the-dark.actor.pc * .harm-armor .character-harm {
-  width: 100%;
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-harm,
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery {
+  flex: 2;
 }
-.blades-in-the-dark.actor.pc * .harm-armor .character-harm table {
-  width: 100%;
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-armor {
+  flex: 1;
 }
-.blades-in-the-dark.actor.pc * .harm-armor .character-harm table th {
-  background-color: #191813;
-  color: #EEEFFF;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-harm table input[type=text] {
-  width: 100%;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock {
-  margin: 0 auto;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-4 {
-  position: relative;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-4 .blades-clock {
-  position: relative;
-  padding: 0;
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  list-style: none;
-  overflow: hidden;
-  background-size: cover;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-4 .blades-clock label {
-  overflow: hidden;
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 100%;
-  height: 100%;
-  transform-origin: 0% 100%;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-4 .blades-clock label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-4 .blades-clock input {
-  position: absolute;
-  display: none;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-4 .blades-clock input[value="0"] {
-  display: none;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-4 .blades-clock *:nth-child(3) {
-  transform: rotate(0deg) skewY(180deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-4 .blades-clock *:nth-child(5) {
-  transform: rotate(90deg) skewY(180deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-4 .blades-clock *:nth-child(7) {
-  transform: rotate(180deg) skewY(180deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-4 .blades-clock *:nth-child(9) {
-  transform: rotate(270deg) skewY(180deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 {
-  position: relative;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 .blades-clock {
-  position: relative;
-  padding: 0;
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  list-style: none;
-  overflow: hidden;
-  background-size: cover;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 .blades-clock label {
-  overflow: hidden;
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 100%;
-  height: 100%;
-  transform-origin: 0% 100%;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 .blades-clock label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 .blades-clock input {
-  position: absolute;
-  display: none;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 .blades-clock input[value="0"] {
-  display: none;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 .blades-clock *:nth-child(3) {
-  transform: rotate(0deg) skewY(150deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 .blades-clock *:nth-child(5) {
-  transform: rotate(60deg) skewY(150deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 .blades-clock *:nth-child(7) {
-  transform: rotate(120deg) skewY(150deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 .blades-clock *:nth-child(9) {
-  transform: rotate(180deg) skewY(150deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 .blades-clock *:nth-child(11) {
-  transform: rotate(240deg) skewY(150deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-6 .blades-clock *:nth-child(13) {
-  transform: rotate(300deg) skewY(150deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 {
-  position: relative;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock {
-  position: relative;
-  padding: 0;
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  list-style: none;
-  overflow: hidden;
-  background-size: cover;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock label {
-  overflow: hidden;
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 100%;
-  height: 100%;
-  transform-origin: 0% 100%;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock input {
-  position: absolute;
-  display: none;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock input[value="0"] {
-  display: none;
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock *:nth-child(3) {
-  transform: rotate(0deg) skewY(135deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock *:nth-child(5) {
-  transform: rotate(45deg) skewY(135deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock *:nth-child(7) {
-  transform: rotate(90deg) skewY(135deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock *:nth-child(9) {
-  transform: rotate(135deg) skewY(135deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock *:nth-child(11) {
-  transform: rotate(180deg) skewY(135deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock *:nth-child(13) {
-  transform: rotate(225deg) skewY(135deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock *:nth-child(15) {
-  transform: rotate(270deg) skewY(135deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-health-clock.clocks-8 .blades-clock *:nth-child(17) {
-  transform: rotate(315deg) skewY(135deg);
-}
-.blades-in-the-dark.actor.pc * .harm-armor .character-armor-uses div {
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-armor .character-armor-uses div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock {
+  margin: 0 auto;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-4 {
+  position: relative;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-4 .blades-clock {
+  position: relative;
+  padding: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  list-style: none;
+  overflow: hidden;
+  background-size: cover;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-4 .blades-clock label {
+  overflow: hidden;
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0% 100%;
+  transition: filter 0.1s;
+  cursor: pointer;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-4 .blades-clock label:hover {
+  filter: brightness(0.8);
+  opacity: 0.9;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-4 .blades-clock input {
+  position: absolute;
+  display: none;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-4 .blades-clock input[value="0"] {
+  display: none;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-4 .blades-clock *:nth-child(3) {
+  transform: rotate(0deg) skewY(180deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-4 .blades-clock *:nth-child(5) {
+  transform: rotate(90deg) skewY(180deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-4 .blades-clock *:nth-child(7) {
+  transform: rotate(180deg) skewY(180deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-4 .blades-clock *:nth-child(9) {
+  transform: rotate(270deg) skewY(180deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 {
+  position: relative;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 .blades-clock {
+  position: relative;
+  padding: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  list-style: none;
+  overflow: hidden;
+  background-size: cover;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 .blades-clock label {
+  overflow: hidden;
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0% 100%;
+  transition: filter 0.1s;
+  cursor: pointer;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 .blades-clock label:hover {
+  filter: brightness(0.8);
+  opacity: 0.9;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 .blades-clock input {
+  position: absolute;
+  display: none;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 .blades-clock input[value="0"] {
+  display: none;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 .blades-clock *:nth-child(3) {
+  transform: rotate(0deg) skewY(150deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 .blades-clock *:nth-child(5) {
+  transform: rotate(60deg) skewY(150deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 .blades-clock *:nth-child(7) {
+  transform: rotate(120deg) skewY(150deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 .blades-clock *:nth-child(9) {
+  transform: rotate(180deg) skewY(150deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 .blades-clock *:nth-child(11) {
+  transform: rotate(240deg) skewY(150deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-6 .blades-clock *:nth-child(13) {
+  transform: rotate(300deg) skewY(150deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 {
+  position: relative;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock {
+  position: relative;
+  padding: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  list-style: none;
+  overflow: hidden;
+  background-size: cover;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock label {
+  overflow: hidden;
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0% 100%;
+  transition: filter 0.1s;
+  cursor: pointer;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock label:hover {
+  filter: brightness(0.8);
+  opacity: 0.9;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock input {
+  position: absolute;
+  display: none;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock input[value="0"] {
+  display: none;
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock *:nth-child(3) {
+  transform: rotate(0deg) skewY(135deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock *:nth-child(5) {
+  transform: rotate(45deg) skewY(135deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock *:nth-child(7) {
+  transform: rotate(90deg) skewY(135deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock *:nth-child(9) {
+  transform: rotate(135deg) skewY(135deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock *:nth-child(11) {
+  transform: rotate(180deg) skewY(135deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock *:nth-child(13) {
+  transform: rotate(225deg) skewY(135deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock *:nth-child(15) {
+  transform: rotate(270deg) skewY(135deg);
+}
+.blades-in-the-dark.actor.pc * .harm-recovery-armor .character-harm-recovery-armor .character-recovery .character-health-clock.clocks-8 .blades-clock *:nth-child(17) {
+  transform: rotate(315deg) skewY(135deg);
 }
 .blades-in-the-dark.actor.pc * .attributes {
   display: flex;
