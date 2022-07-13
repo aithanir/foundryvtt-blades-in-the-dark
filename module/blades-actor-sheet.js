@@ -148,6 +148,13 @@ export class BladesActorSheet extends BladesSheet {
       this.render(false)
     });
 
+    //Cancel treatment
+    html.find('.cancel-recovery').click( async ev => {
+      const element = $(ev.currentTarget).parents(".item");      
+      await this.actor.cancelRecovery();
+      element.slideUp(200, () => this.render(false));
+    });
+
     // manage active effects
     html.find(".effect-control").click(ev => BladesActiveEffect.onManageActiveEffect(ev, this.actor));
   }

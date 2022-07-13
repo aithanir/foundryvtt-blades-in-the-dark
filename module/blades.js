@@ -127,6 +127,60 @@ Hooks.once("init", async function() {
 
   });  
 
+  // Recovery harm card
+  Handlebars.registerHelper('recovery_harm_card', (actor, options) => {
+    let html = "";
+    const data = actor.data.root;
+
+    const recovery = data.data.recovery;
+    if(!recovery) return html; //No need to continue if there's no recovery data
+
+    const recovery_card = data.items.find(i => i._id === recovery.harmId && i.type === "harm_card")
+    if(!recovery_card) return html; //No need to continue if there is no harm card in recovery
+
+    html += '<div class="item-body flex-horizontal">'  
+    html += `<div class="item-name">${recovery_card.name}</div>`
+    html += '</div>'
+    if (recovery.clock === 0 || (recovery.clock == recovery.progress)){
+      html += `<a class="item-control item-delete" title="${game.i18n.localize('WOD.Recovery.TitleCompleteRecovery')}"><i class="fas fa-trash"></i></a>`;
+    }else{
+      html += `<a class="item-control cancel-recovery" title="${game.i18n.localize('WOD.Recovery.TitleCancelRecovery')}"><i class="fas fa-undo-alt"></i></a>`;
+    }
+    return html;
+  });
+
+
+  // Has harm handlebar
+  Handlebars.registerHelper('has_harm', (actor) =>{
+    if(actor.items){
+      const harmlist = actor.items.filter(i => i.type === "harm_card") || [];
+      return harmlist.length > 0;
+    }
+    return false;
+  });  
+
+  // Recover over next interval handlebar
+  Handlebars.registerHelper('recover_next_interval', (recovery) =>{
+    if(!recovery || !recovery.clock) return false;
+    return recovery.clock == 0;
+  });
+
+  // Is in recovery handlebar
+  Handlebars.registerHelper('in_recovery', (actor) =>{
+    const data = actor.data.root || actor.data;      
+    if(!data.recovery) return false;
+    if(data.recovery.harmId) return true;
+    return false;
+  });  
+
+  // Is not in recovery handlebar
+  Handlebars.registerHelper('not_in_recovery', (actor) =>{
+    const data = actor.data.root || actor.data;      
+    if(!data.recovery) return true;
+    if(data.recovery.harmId) return false;
+    return true;
+  });
+
   // NotEquals handlebar.
   Handlebars.registerHelper('noteq', (a, b, options) => {
     return (a !== b) ? options.fn(this) : '';

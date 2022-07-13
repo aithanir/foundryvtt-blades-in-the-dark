@@ -169,6 +169,7 @@
           <tr>
             <td>
               <div id="character-{{actor._id}}-harm-list" class="harm-card-list">
+                {{#with actor as |actor|}}
                 {{#each actor.items as |item id|}}
                 {{#if (eq item.type "harm_card")}}
                   <div class="item flex-horizontal" data-item-id="{{item._id}}">
@@ -176,32 +177,35 @@
                       <img src="{{item.img}}" title="{{item.name}}" width="20" height="20"/>                    
                       <div class="item-name tooltip">{{item.name}}<span class="tooltiptext">{{{item.data.description}}}</span></div>
                     </div>
-                    <a class="item-control harm-card-recovery" title="{{localize 'WOD.TitleRecoverHarm'}}"><i class="fas fa-first-aid red"></i></a>                    
+                    {{#if (not_in_recovery actor)}}
+                    <a class="item-control harm-card-recovery" title="{{localize 'WOD.TitleRecoverHarm'}}"><i class="fas fa-first-aid"></i></a>
+                    {{/if}}
                   </div>
                 {{/if}}
                 {{/each}}
+                {{/with}}
               </div>              
             </td>
             <td>          
               {{#if data.recovery.harmId}}
-              {{#with data.recovery as | recovery |}}
-              <div class="item flex-horizontal" data-item-id="{{harmId}}">
-                <div class="item-body flex-horizontal">
-                  <div>{{recovery.position}}</div>
-                  <div class="item-name">{{recovery.harmId}}</div>
-                </div>
+              <div class="item flex-horizontal" data-item-id="{{data.recovery.harmId}}">
+                {{#recovery_harm_card}}{{/recovery_harm_card}}
               </div>
-              <div id="character-{{actor._id}}-health-clock" class="character-health-clock">
-              {{#if recovery.clock}}
-              {{{blades-clock "recovery-clock" recovery.clock recovery.progress actor._id}}}
+              {{#if (recover_next_interval data.recovery)}}
+              <p>{{localize 'WOD.Recovery.NextInterval'}}</p>
+              {{else if data.recovery.clock}}
+              {{#if (eq data.recovery.clock data.recovery.progress)}}
+              <p>{{localize 'WOD.Recovery.RecoveryComplete'}}</p>
               {{else}}
-              <p>Remove harm at the next interval</p>
-              {{/if}} 
-              {{/with}}                             
-              {{else}}                
-              <p>Seek treatment and heal your harm</p>
-              {{/if}}
+              <p style="text-transform: capitalize">{{data.recovery.position}} recovery.</p>       
+              <div id="character-{{actor._id}}-health-clock" class="character-health-clock clocks-{{data.recovery.clock}}">
+              {{{blades-clock "data.recovery.progress" data.recovery.clock data.recovery.progress actor._id}}}
               </div>
+              {{/if}}               
+              {{/if}}
+              {{else if (has_harm actor)}}                
+              <p>{{localize 'WOD.Recovery.SeekTreatment'}}</p>              
+              {{/if}}
             </td>
             <td id="character-{{actor._id}}-armor-uses" class="character-armor-uses">
               <div>
