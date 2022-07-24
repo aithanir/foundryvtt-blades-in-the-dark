@@ -237,7 +237,7 @@
   "WOD.DiscardCondition": "Discard Condition",
   "WOD.Treatment.Position": "Treatment Complexity",
   "WOD.Treatment.Clock": "Treatment Period",
-  "WOD.Recovery.TitleCancelRecovery": "Abandon Treatnent",
+  "WOD.Recovery.TitleCancelRecovery": "Abandon Treatment",
   "WOD.Recovery.TitleCompleteRecovery": "Complete Recovery",
   "WOD.Recovery.SeekTreatment": "Seek treatment for your injuries and shock.",
   "WOD.Recovery.NextInterval": "Complete your recovery during the next interval.",  

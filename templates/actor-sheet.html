@@ -188,13 +188,12 @@
           {{#if (recover_next_interval data.recovery)}}
           <p>{{localize 'WOD.Recovery.NextInterval'}}</p>
           {{else if data.recovery.clock}}
-          {{#if (eq data.recovery.clock data.recovery.progress)}}
-          <p>{{localize 'WOD.Recovery.RecoveryComplete'}}</p>
-          {{else}}
           <p style="text-transform: capitalize">{{data.recovery.position}} recovery.</p>       
           <div id="character-{{actor._id}}-health-clock" class="character-health-clock clocks-{{data.recovery.clock}}">
           {{{blades-clock "data.recovery.progress" data.recovery.clock data.recovery.progress actor._id}}}
           </div>
+          {{#if (eq data.recovery.clock data.recovery.progress)}}
+          <p>{{localize 'WOD.Recovery.RecoveryComplete'}}</p>          
           {{/if}}               
           {{/if}}
           {{else if (has_harm actor)}}                

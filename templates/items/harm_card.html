@@ -12,6 +12,8 @@
     </section>
 
     <div class="flex-vertical">   
+      <div class="label-stripe">{{localize "WOD.DiscardCondition"}}</div> 
+      <textarea name="data.discard_condition">{{{data.discard_condition}}}</textarea>
       <input id="harm-scale" type="text" name="data.scale" value="{{data.scale}}" placeholder="{{localize 'WOD.Scale'}}">
       <label class="label-stripe">{{localize "WOD.Scale"}}</label> 
       <input id="continuity" type="text" name="data.continuity" value="{{data.continuity}}" placeholder="{{localize 'WOD.Continuity'}}">
@@ -24,7 +26,7 @@
       <label class="label-stripe">{{localize "WOD.Treatment.Position"}}</label>
       <input id="harm-treatment-clock" type="text" name="data.treatment.clock" value="{{data.treatment.clock}}" placeholder="{{localize 'WOD.Treatment.Clock'}}">
       <div class="label-stripe">{{localize "WOD.Treatment.Clock"}}</div>
-      <textarea name="data.discard_condition">{{{data.discard_condition}}}</textarea>      
+
       {{#if isGM}}
         <div class="label-stripe">{{localize "BITD.Effects"}}</div>
         <div id="effects">{{> "systems/winter-of-discontent/templates/parts/active-effects.html"}}</div>
