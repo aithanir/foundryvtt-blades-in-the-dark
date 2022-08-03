@@ -1,8 +1,8 @@
 {
   "name": "winter-of-discontent",
   "title": "Winter of Discontent",
-  "description": "A Blades in the dark game system.",
-  "version": "wod-3.19-0.9",
+  "description": "A Forged in the Dark hack.",
+  "version": "wod-3.19-0.10",
   "minimumCoreVersion": "0.8.5",
   "compatibleCoreVersion": "9",
   "templateVersion": 1,
@@ -22,7 +22,7 @@
   ],
   "url": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/tree/winter-of-discontent/",
   "manifest": "https://raw.githubusercontent.com/aithanir/foundryvtt-blades-in-the-dark/winter-of-discontent/system.json",
-  "download": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/archive/wod-3.19-0.9.zip",
+  "download": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/archive/wod-3.19-0.10.zip",
   "packs": [
     {
       "name": "class",
