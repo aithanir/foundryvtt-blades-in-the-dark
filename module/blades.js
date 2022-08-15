@@ -110,7 +110,6 @@ Hooks.once("init", async function() {
   Handlebars.registerHelper('injurycounter', function(selected, options) {
     let html = options.fn(this);
     let count = selected
-    if (count > 4) count = 4;
 
     const rgx = new RegExp(' value=\"' + count + '\"');
     return html.replace(rgx, "$& checked=\"checked\"");
@@ -121,7 +120,7 @@ Hooks.once("init", async function() {
   Handlebars.registerHelper('shockcounter', function(selected, options) {
     let html = options.fn(this);
     let count = selected
-    if (count > 4) count = 4;
+
     const rgx = new RegExp(' value=\"' + count + '\"');
     return html.replace(rgx, "$& checked=\"checked\"");
 

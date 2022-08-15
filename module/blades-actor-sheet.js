@@ -98,7 +98,7 @@ export class BladesActorSheet extends BladesSheet {
     data.data.injury_max = injury_max;
 
     if (shock < 0) { shock=0;}
-    if (shock > injury_max) { shock=injury_max;}
+    if (shock > shock_max) { shock=shock_max;}
     data.data.harm.shock = String(shock);
     data.data.shock_max = shock_max;
 
