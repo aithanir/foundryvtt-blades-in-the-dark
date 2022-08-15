@@ -141,6 +141,13 @@ export class BladesActorSheet extends BladesSheet {
       element.slideUp(200, () => this.render(false));
     });
 
+    // Delete Project
+    html.find('.project-delete').click( async ev => {
+      const element = $(ev.currentTarget).parents(".project");
+      await this.actor.removeProject([element.data("projectId")]);
+      element.slideUp(200, () => this.render(false));
+    });    
+
     // Recover from Harm Cards
     html.find('.harm-card-recovery').click( async ev => {
       const element = $(ev.currentTarget).parents(".item");

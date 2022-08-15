@@ -239,7 +239,6 @@ export class BladesActor extends Actor {
     recovery.clock = treatment.clock ?? 4;
     recovery.progress = 0;
     await this.update({"data.recovery": recovery},{"diff":false});
-    const one=1;
   }
 
   async getRecoveryCardId(){
@@ -253,5 +252,27 @@ export class BladesActor extends Actor {
 
   async cancelRecovery(){
       await this.update({"data.recovery": game.system.template.Actor.character.recovery});
+  }
+
+
+  async addProject(project){
+    let projects = this.data.data.projects
+    if (!projects || Array.isArray(projects)) projects = {};
+
+    project._id = foundry.utils.randomID()
+    projects[project._id] = project
+    await this.update({"data.projects": projects});
+    console.log(`Project ${project._id} added`)
+  }
+
+  //TODO: Find correct way to remove a project
+  //   Currently using a hack of non-recursive update to update all data.
+  async removeProject(id){
+    let data = this.data.data
+    if (!data.projects || Array.isArray(data.projects)) data.projects = {};
+
+    delete data.projects[id];
+    await this.update({"data": data},{"diff":false,"recursive":false});
+    console.log(`Project ${id} removed`)
   }
 }

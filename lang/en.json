@@ -243,6 +243,14 @@
   "WOD.Recovery.NextInterval": "Complete your recovery during the next interval.",  
   "WOD.Recovery.RecoveryComplete": "Your recovery is complete.",
   "WOD.TitleRecoverHarm": "Seek treatment",
+
+  "WOD.Projects.Label": "Projects",
+  "WOD.Projects.ProjectComplete": "Your project is complete",
+  "WOD.Projects.Add": "Add Project",
+  "WOD.Projects.Delete": "Delete Project",
+  "WOD.Projects.SetDescription": "Write a short description for your project.",
+  "WOD.Projects.SetType": "Select clock-type for your project.",
+
   "WOD.SkillsPhysique": "Physique",
   "WOD.SkillsPhysiqueShort": "Physique",
   "WOD.SkillsAssault": "Assault",

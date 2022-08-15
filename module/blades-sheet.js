@@ -11,6 +11,7 @@ export class BladesSheet extends ActorSheet {
 	activateListeners(html) {
     super.activateListeners(html);
     html.find(".item-add-popup").click(this._onItemAddClick.bind(this));
+    html.find(".project-add-popup").click(this._onProjectAddClick.bind(this));
     html.find(".update-box").click(this._onUpdateBoxClick.bind(this));
 
     // This is a workaround until is being fixed in FoundryVTT.
@@ -92,7 +93,64 @@ export class BladesSheet extends ActorSheet {
 
     await Item.create(items_to_add, {parent: this.document});
   }
+  
   /* -------------------------------------------- */
+
+  async _onProjectAddClick(event) {
+
+    let html = `<div class="project-to-add">`;
+    html += `<hr/>`
+        
+    html += `<input type="text" id="${this.actor.data._id}-new-project-description" name="project-description" placeholder="New Project" value="">`
+    html += `<label class="flex-horizontal" for="${this.actor.data._id}-new-project-description">${game.i18n.localize('WOD.Projects.SetDescription')}<label>`;
+
+    html += `<br/><br/>`
+
+    html += `<select data-type="Number" id="${this.actor.data._id}-new-project-type" name="project-type">`
+    html += `<option value="4" selected>4</option>`
+    html += `<option value="6">6</option>`
+    html += `<option value="8">8</option>`
+    html += `</select>`
+    html += `&nbsp;<label class="flex-horizontal" for="${this.actor.data._id}-new-project-type">${game.i18n.localize('WOD.Projects.SetType')}<label>`;
+
+    html += `<hr/>`
+    html += "</div>"
+
+    let options = {
+      // width: "500"
+    }
+    
+    let dialog = new Dialog({
+      title: `${game.i18n.localize('WOD.Projects.Add')}`,
+      content: html,
+      buttons: {
+        one: {
+          icon: '<i class="fas fa-check"></i>',
+          label: game.i18n.localize('Add'),
+          callback: async (html) => await this.addProjectToSheet($(html).find('.project-to-add'))
+        },
+        two: {
+          icon: '<i class="fas fa-times"></i>',
+          label: game.i18n.localize('Cancel'),
+          callback: () => false
+        }
+      },
+      default: "two"
+    }, options);
+
+    dialog.render(true);
+  }
+
+    /* -------------------------------------------- */
+
+  async addProjectToSheet(el) {
+    let d = el.find(`#${this.actor.data._id}-new-project-description`);
+    let t = el.find("option:selected");
+    d = d?.val() || "New project";
+    t = t?.val() || 4;
+
+    const data = this.actor.addProject({description: d, clock: t, progress:0})
+  }
 
   /**
    * Roll an Attribute die.

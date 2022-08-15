@@ -133,6 +133,13 @@ $hover-brightness: 0.8;
     }
   }
 
+  // Projects
+  .projects {
+    .project-add-popup {
+      margin-left: 10px;
+    }
+  }
+
   // Experience teeth
   .teeth-experience {
     @include toothradio(10px, 30px, "assets/teeth/stresstooth-halfgrey.png", "assets/teeth/stresstooth-red.png");
@@ -295,6 +302,26 @@ $hover-brightness: 0.8;
 
   .item-class-label {
     margin-bottom: 10px;
+  }
+
+  //PROJECT
+  .project {
+    .character-project-clock {
+      margin: 0 auto;
+      padding-left: 33px;
+      &.clocks-4 {
+        @include clock(4, 66);
+      }
+      &.clocks-6 {
+        @include clock(6, 66);
+      }
+      &.clocks-8 {
+        @include clock(8, 66);
+      }
+    }
+    .project-body {
+      padding-top: 10px;
+    }
   }
 
   .name,
