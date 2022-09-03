@@ -8,23 +8,23 @@
 
     {{!-- Sheet Body --}}
     <section class="sheet-body flex">
-      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+      {{editor content=system.description target="system.description" button=true owner=owner editable=editable}}
     </section>
 
     <div class="flex-vertical">   
       <div class="label-stripe">{{localize "WOD.DiscardCondition"}}</div> 
-      <textarea name="data.discard_condition">{{{data.discard_condition}}}</textarea>
-      <input id="harm-scale" type="text" name="data.scale" value="{{data.scale}}" placeholder="{{localize 'WOD.Scale'}}">
+      <textarea name="system.discard_condition">{{{system.discard_condition}}}</textarea>
+      <input id="harm-scale" type="text" name="system.scale" value="{{system.scale}}" placeholder="{{localize 'WOD.Scale'}}">
       <label class="label-stripe">{{localize "WOD.Scale"}}</label> 
-      <input id="continuity" type="text" name="data.continuity" value="{{data.continuity}}" placeholder="{{localize 'WOD.Continuity'}}">
+      <input id="continuity" type="text" name="system.continuity" value="{{system.continuity}}" placeholder="{{localize 'WOD.Continuity'}}">
       <label class="label-stripe">{{localize "WOD.Continuity"}}</label>
-      <input id="injury-value" type="text" name="data.injury_value" value="{{data.injury_value}}" placeholder="{{localize 'WOD.InjuryValue'}}">
+      <input id="injury-value" type="text" name="system.injury_value" value="{{system.injury_value}}" placeholder="{{localize 'WOD.InjuryValue'}}">
       <label class="label-stripe">{{localize "WOD.InjuryValue"}}</label>
-      <input id="shock-value" type="text" name="data.shock_value" value="{{data.shock_value}}" placeholder="{{localize 'WOD.ShockValue'}}">
+      <input id="shock-value" type="text" name="system.shock_value" value="{{system.shock_value}}" placeholder="{{localize 'WOD.ShockValue'}}">
       <label class="label-stripe">{{localize "WOD.ShockValue"}}</label>
-      <input id="harm-treatment-position" type="text" name="data.treatment.position" value="{{data.treatment.position}}" placeholder="{{localize 'WOD.Treatment.Position'}}">
+      <input id="harm-treatment-position" type="text" name="system.treatment.position" value="{{system.treatment.position}}" placeholder="{{localize 'WOD.Treatment.Position'}}">
       <label class="label-stripe">{{localize "WOD.Treatment.Position"}}</label>
-      <input id="harm-treatment-clock" type="text" name="data.treatment.clock" value="{{data.treatment.clock}}" placeholder="{{localize 'WOD.Treatment.Clock'}}">
+      <input id="harm-treatment-clock" type="text" name="system.treatment.clock" value="{{system.treatment.clock}}" placeholder="{{localize 'WOD.Treatment.Clock'}}">
       <div class="label-stripe">{{localize "WOD.Treatment.Clock"}}</div>
 
       {{#if isGM}}

@@ -1,12 +1,17 @@
 {
-  "name": "winter-of-discontent",
+  "id": "winter-of-discontent",
   "title": "Winter of Discontent",
   "description": "A Forged in the Dark hack.",
-  "version": "wod-3.19-0.11",
-  "minimumCoreVersion": "0.8.5",
-  "compatibleCoreVersion": "9",
+  "version": "wod-4.3-0.11",
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.284"
+  },
   "templateVersion": 1,
-  "author": "aithanir",
+  "authors": [
+    { "name": "megastruktur" },
+    { "name": "aithanir"}
+  ],
   "esmodules": [
     "module/blades.js"
   ],
@@ -29,105 +34,105 @@
       "label": "Classes",
       "system": "winter-of-discontent",
       "path": "./packs/wod/classes.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "heritage",
       "label": "Heritages",
       "system": "winter-of-discontent",
       "path": "./packs/heritages.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "vice",
       "label": "Vices",
       "system": "winter-of-discontent",
       "path": "./packs/vices.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "background",
       "label": "Backgrounds",
       "system": "winter-of-discontent",
       "path": "./packs/backgrounds.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "item",
       "label": "Items",
       "system": "winter-of-discontent",
       "path": "./packs/items.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "ability",
       "label": "Abilities",
       "system": "winter-of-discontent",
       "path": "./packs/wod/abilities.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "crew_reputation",
       "label": "Crew Reputation",
       "system": "winter-of-discontent",
       "path": "./packs/wod/crew_reputation.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "crew_type",
       "label": "Crew Types",
       "system": "winter-of-discontent",
       "path": "./packs/wod/crew_types.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "crew_upgrade",
       "label": "Crew Upgrades",
       "system": "winter-of-discontent",
       "path": "./packs/wod/crew_upgrades.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "crew_ability",
       "label": "Crew Abilities",
       "system": "winter-of-discontent",
       "path": "./packs/wod/crew_abilities.db",
-      "entity": "Item"
+      "type": "Item"
     },
 	{
       "name": "faction",
       "label": "Factions",
       "system": "winter-of-discontent",
       "path": "./packs/factions.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "npc",
       "label": "NPCs",
       "system": "winter-of-discontent",
       "path": "./packs/npcs.db",
-      "entity": "Actor"
+      "type": "Actor"
     },
 	{
       "name": "entanglements",
       "label": "Entanglements",
       "system": "winter-of-discontent",
       "path": "./packs/entanglements.db",
-      "entity": "RollTable"
+      "type": "RollTable"
     },
 	{
       "name": "entanglements-journals",
       "label": "Entanglements Journals",
       "system": "winter-of-discontent",
       "path": "./packs/entanglements-journals.db",
-      "entity": "JournalEntry"
+      "type": "JournalEntry"
     },
 	{
       "name": "entanglements-macro",
       "label": "Entanglements Macro",
       "system": "winter-of-discontent",
       "path": "./packs/entanglements-macro.db",
-      "entity": "Macro"
+      "type": "Macro"
     }
   ]
 }
