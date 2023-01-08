@@ -101,17 +101,17 @@ export class BladesSheet extends ActorSheet {
     let html = `<div class="project-to-add">`;
     html += `<hr/>`
         
-    html += `<input type="text" id="${this.actor.data._id}-new-project-description" name="project-description" placeholder="New Project" value="">`
-    html += `<label class="flex-horizontal" for="${this.actor.data._id}-new-project-description">${game.i18n.localize('WOD.Projects.SetDescription')}<label>`;
+    html += `<input type="text" id="${this.actor._id}-new-project-description" name="project-description" placeholder="New Project" value="">`
+    html += `<label class="flex-horizontal" for="${this.actor._id}-new-project-description">${game.i18n.localize('WOD.Projects.SetDescription')}<label>`;
 
     html += `<br/><br/>`
 
-    html += `<select data-type="Number" id="${this.actor.data._id}-new-project-type" name="project-type">`
+    html += `<select data-type="Number" id="${this.actor._id}-new-project-type" name="project-type">`
     html += `<option value="4" selected>4</option>`
     html += `<option value="6">6</option>`
     html += `<option value="8">8</option>`
     html += `</select>`
-    html += `&nbsp;<label class="flex-horizontal" for="${this.actor.data._id}-new-project-type">${game.i18n.localize('WOD.Projects.SetType')}<label>`;
+    html += `&nbsp;<label class="flex-horizontal" for="${this.actor._id}-new-project-type">${game.i18n.localize('WOD.Projects.SetType')}<label>`;
 
     html += `<hr/>`
     html += "</div>"
@@ -144,7 +144,7 @@ export class BladesSheet extends ActorSheet {
     /* -------------------------------------------- */
 
   async addProjectToSheet(el) {
-    let d = el.find(`#${this.actor.data._id}-new-project-description`);
+    let d = el.find(`#${this.actor._id}-new-project-description`);
     let t = el.find("option:selected");
     d = d?.val() || "New project";
     t = t?.val() || 4;

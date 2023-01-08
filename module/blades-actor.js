@@ -219,60 +219,64 @@ export class BladesActor extends Actor {
    */
 
   async startRecovery(itemId){
-    let recovery = this.data.data.recovery;
+    let recovery = this.system.recovery;
     if (!recovery) recovery = game.system.template.Actor.character.recovery;
 
-    const currentRecoveryCard = await this.getRecoveryCardId();
-    if(currentRecoveryCard){
-      console.warn(`Recovery: harmId ${currentRecoveryCard} is already in recovery`);
+    const currentRecoveryCardId = await this.getRecoveryCardId();
+    if(currentRecoveryCardId){
+      console.warn(`Recovery: harmId ${currentRecoveryCardId} is already in recovery`);
       return;
     }
 
-    let recovery_card = this.data.items.get(itemId);
+    let recovery_card = this.items.get(itemId);
     if(!recovery_card || recovery_card.type != "harm_card") return; //Skip if we can't find the item or it's not a harm_card
     
-    const treatment = recovery_card.data.data.treatment;
+    const treatment = recovery_card.system.treatment;
     if (!treatment) return;  //Skip if no treatment on item
 
     recovery.harmId = itemId;
     recovery.position = treatment.position ?? "controlled";
     recovery.clock = treatment.clock ?? 4;
     recovery.progress = 0;
-    await this.update({"data.recovery": recovery},{"diff":false});
+    await this.update({"system.recovery": recovery},{"diff":false});
   }
 
   async getRecoveryCardId(){
-    let recovery = this.data.data.recovery;
-    let recovery_card = this.data.items.get(recovery.harmdId);
+    let recovery = this.system.recovery;
+    let recovery_card = this.items.get(recovery.harmId);
     if(!recovery_card || recovery_card.type != "harm_card"){
-      await this.update({"data.recovery": game.system.template.Actor.character.recovery});
+      await this.update({"system.recovery": game.system.template.Actor.character.recovery});
     }
-    return recovery.hardId
+    return recovery.harmId
   }
 
   async cancelRecovery(){
-      await this.update({"data.recovery": game.system.template.Actor.character.recovery});
+      await this.update({"system.recovery": game.system.template.Actor.character.recovery});
   }
 
 
   async addProject(project){
-    let projects = this.data.data.projects
+    let sheetData = this.system
+    let projects = sheetData.projects
+
     if (!projects || Array.isArray(projects)) projects = {};
 
     project._id = foundry.utils.randomID()
     projects[project._id] = project
-    await this.update({"data.projects": projects});
+    await this.update({"system.projects": projects});
     console.log(`Project ${project._id} added`)
   }
 
   //TODO: Find correct way to remove a project
   //   Currently using a hack of non-recursive update to update all data.
   async removeProject(id){
-    let data = this.data.data
-    if (!data.projects || Array.isArray(data.projects)) data.projects = {};
+    let sheetData = this.system;
+    let projects = sheetData.projects;
+    if (!projects || Array.isArray(projects)) projects = {};
 
-    delete data.projects[id];
-    await this.update({"data": data},{"diff":false,"recursive":false});
+    delete projects[id];
+    sheetData.projects = projects;
+    await this.update({"system": sheetData},{"diff":false,"recursive":false});
     console.log(`Project ${id} removed`)
   }
 }

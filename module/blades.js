@@ -135,16 +135,16 @@ Hooks.once("init", async function() {
   // Recovery harm card
   Handlebars.registerHelper('recovery_harm_card', (actor, options) => {
     let html = "";
-    const data = actor.data.root;
+    const sheetData = actor.system;
+    const recovery = sheetData.recovery;
 
-    const recovery = data.data.recovery;
     if(!recovery) return html; //No need to continue if there's no recovery data
 
-    const recovery_card = data.items.find(i => i._id === recovery.harmId && i.type === "harm_card")
+    const recovery_card = actor.items.find(i => i._id === recovery.harmId && i.type === "harm_card")
     if(!recovery_card) return html; //No need to continue if there is no harm card in recovery
 
     html += '<div class="item-body flex-horizontal">'  
-    html += `<div class="item-name tooltip">${recovery_card.name}<span class="tooltiptext">${recovery_card.data.description}</span></div>`
+    html += `<div class="item-name tooltip">${recovery_card.name}<span class="tooltiptext">${recovery_card.system.description}</span></div>`
     html += '</div>'
     if (recovery.clock === 0 || (recovery.clock == recovery.progress)){
       html += `<a class="item-control item-delete" title="${game.i18n.localize('WOD.Recovery.TitleCompleteRecovery')}"><i class="fas fa-trash"></i></a>`;
@@ -156,12 +156,9 @@ Hooks.once("init", async function() {
 
 
   // Has harm handlebar
-  Handlebars.registerHelper('has_harm', (actor) =>{
-    if(actor.items){
-      const harmlist = actor.items.filter(i => i.type === "harm_card") || [];
-      return harmlist.length > 0;
-    }
-    return false;
+  Handlebars.registerHelper('has_harm', (items) =>{
+    const harmlist = items.filter(i => i.type === "harm_card") || [];
+    return harmlist.length > 0;
   });  
 
   // Recover over next interval handlebar
@@ -172,36 +169,36 @@ Hooks.once("init", async function() {
 
   // Is in recovery handlebar
   Handlebars.registerHelper('in_recovery', (actor) =>{
-    const data = actor.data.root || actor.data;      
-    if(!data.recovery) return false;
-    if(data.recovery.harmId) return true;
+    const sheetData = actor.system;   
+    if(!sheetData.recovery) return false;
+    if(sheetData.recovery.harmId) return true;
     return false;
   });  
 
   // Is not in recovery handlebar
   Handlebars.registerHelper('not_in_recovery', (actor) =>{
-    const data = actor.data.root || actor.data;      
-    if(!data.recovery) return true;
-    if(data.recovery.harmId) return false;
+    const sheetData = actor.system;
+    if(!sheetData.recovery) return true;
+    if(sheetData.recovery.harmId) return false;
     return true;
   });
 
   // Has projects handlebar
   Handlebars.registerHelper('has_projects', (actor) =>{
-    const data = actor.data.root || actor.data;
-    if(data.projects){
-      return Object.keys(data.projects).length > 0;
+    const sheetData = actor.system;
+    if(sheetData.projects){
+      return Object.keys(sheetData.projects).length > 0;
     }
     return false;
   });
 
   // Has projects handlebar
   Handlebars.registerHelper('projectcounter', (actor) =>{
-    const data = actor.data.root || actor.data;
-    if(data.projects){
-      return Object.keys(data.projects).length;
+    const sheetData = actor.system;
+    if(sheetData.projects){
+      return Object.keys(sheetData.projects).length;
     }
-    return false;
+    return 0;
   });  
 
   // NotEquals handlebar.
@@ -369,7 +366,7 @@ Hooks.once("init", async function() {
   Handlebars.registerHelper('blades-character-project-clock', function(type, current_value, project_id) {
 
     let html = '';
-    let parameter_name = `data.projects.${project_id}.progress`;
+    let parameter_name = `system.projects.${project_id}.progress`;
     let uniq_id = project_id;
 
     if (current_value === null || current_value === 'null') {

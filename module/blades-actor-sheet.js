@@ -36,7 +36,7 @@ export class BladesActorSheet extends BladesSheet {
     // Note any ability that affect actor data
     // @todo - fix translation.
     let mule_present, enhanced_injury_limit, enhanced_shock_limit;
-    data.items.forEach(i => {
+    sheetData.items.forEach(i => {
       if (i.type == "ability"){
         if (i.name == "(C) Mule") {mule_present = true;}
         if (i.name == "Bound in Darkness") {enhanced_shock_limit = true;}
@@ -48,7 +48,8 @@ export class BladesActorSheet extends BladesSheet {
     let loadout = 0;
     sheetData.items.forEach(i => {loadout += (i.type === "item") ? parseInt(i.system.load) : 0});
     sheetData.system.loadout = loadout;
-    
+    sheetData.system.load_levels={"BITD.Light":"BITD.Light", "BITD.Normal":"BITD.Normal", "BITD.Heavy":"BITD.Heavy"};
+   
     // Encumbrance Levels
     let load_level=["BITD.Light","BITD.Light","BITD.Light","BITD.Light","BITD.Normal","BITD.Normal","BITD.Heavy","BITD.Encumbered",
 			"BITD.Encumbered","BITD.Encumbered","BITD.OverMax"];
@@ -88,14 +89,13 @@ export class BladesActorSheet extends BladesSheet {
     // Sanity Check - Ensure injury/shock values are within expected range
     if (injury < 0) { injury=0;}
     if (injury > injury_max) { injury=injury_max;}
-    sheetData.system.harm.injury = String(injury);
     sheetData.system.injury_max = injury_max;
 
     if (shock < 0) { shock=0;}
     if (shock > shock_max) { shock=shock_max;}
-    sheetData.system.harm.shock = String(shock);
     sheetData.system.shock_max = shock_max;
-
+    sheetData.system.harm = {injury:injury,shock:shock};
+    
     // Sanity Check - Ensure recovery details match the recovery_card
     //                Reset recovery if the card is missing or not a harm_card
     let recovery = {...sheetData.system.recovery};
@@ -109,6 +109,27 @@ export class BladesActorSheet extends BladesSheet {
     }
     sheetData.system.recovery = recovery;
 
+    // Sanity Check Projects - Strip out any projects without expected properties.
+    let projects = sheetData.system.projects;
+    let sanitizedProjects = {}
+    if (!projects || Array.isArray(projects)) projects = {};
+
+    Object.entries(projects).forEach(([key,project]) =>{
+      let keep = true;
+      if(!key) keep = false;
+      if(!project.hasOwnProperty("_id")) keep = false;
+      if(!project.hasOwnProperty("clock")) keep = false;      
+      if(!project.hasOwnProperty("progress")) keep = false;  
+      project.description = project.description || "Pet Project"
+
+      if(keep) sanitizedProjects[key] = project;
+    })
+    sheetData.system.projects = sanitizedProjects;
+
+
+    // set description
+    sheetData.system.description = await TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
+    
     return sheetData;
   }
 

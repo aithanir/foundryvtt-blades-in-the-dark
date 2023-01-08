@@ -161,8 +161,8 @@
       <div  id="character-{{_id}}-harm-recovery-armor" class="flex character-harm-recovery-armor">
         <div id="character-{{_id}}-harm" class="character-harm">
           <div id="character-{{_id}}-harm-list" class="harm-card-list">
-            {{#with actor as |actor|}}
-            {{#each actor.items as |item id|}}
+            {{#with this as |actor|}}
+            {{#each items as |item id|}}
             {{#if (eq item.type "harm_card")}}
               <div class="item flex-horizontal" data-item-id="{{item._id}}">
                 <div class="item-body flex-horizontal">
@@ -182,7 +182,7 @@
           {{#if system.recovery.harmId}}
           <div id="character-{{_id}}-harm-list" class="harm-card-list">             
           <div class="item flex-horizontal" data-item-id="{{system.recovery.harmId}}">
-            {{#recovery_harm_card}}{{/recovery_harm_card}}
+            {{#recovery_harm_card this}}{{/recovery_harm_card}}
           </div>
           </div>
           {{#if (recover_next_interval system.recovery)}}
@@ -196,7 +196,7 @@
           <p>{{localize 'WOD.Recovery.RecoveryComplete'}}</p>          
           {{/if}}               
           {{/if}}
-          {{else if (has_harm actor)}}                
+          {{else if (has_harm items)}}                
           <p>{{localize 'WOD.Recovery.SeekTreatment'}}</p>              
           {{/if}}
         </div>
@@ -229,7 +229,7 @@
       {{!-- Nav menu --}}
       <nav class="tabs flex-horizontal">
         <a class="item" data-tab="abilities">{{localize "BITD.Abilities"}}</a>
-        <a class="item" data-tab="projects">{{localize "WOD.Projects.Label"}} {{#if (has_projects actor)}}[{{projectcounter actor}}]{{/if}}</a>
+        <a class="item" data-tab="projects">{{localize "WOD.Projects.Label"}} {{#if (has_projects this)}}[{{projectcounter this}}]{{/if}}</a>
         <a class="item" data-tab="loadout">{{localize "BITD.Loadout"}}</a>
         <a class="item" data-tab="character-notes">{{localize "BITD.Notes"}}</a>
         {{#if isGM}}
@@ -274,7 +274,7 @@
           <p>{{localize "WOD.Projects.Label"}} <a class="project-add-popup"><i class="fas fa-plus-square"></i></a></p>
         </div>
         <div id="character-{{_id}}-projects-list">
-          {{#each actor.system.projects as |project id|}}
+          {{#each system.projects as |project id|}}
           <div class="project flex-horizontal" data-project-id="{{@key}}">
             <div class="project clock flex-horizontal">
               {{#if project.clock}}
@@ -285,7 +285,7 @@
             </div>            
             <div class="project-body flex-horizontal">
               <div class="project-description">
-                <p><b>{{project.description}}</b></p>
+                <p><b>{{project._id}} {{project.description}}</b></p>
                 {{#if (eq project.clock project.progress)}}
                 <p>{{localize 'WOD.Projects.ProjectComplete'}}</p>          
                 {{/if}}  
