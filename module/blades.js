@@ -31,7 +31,7 @@ Hooks.once("init", async function() {
   game.blades = {
     dice: bladesRoll
   };
-  game.system.bobclocks = {
+  game.system.bladesClocks = {
     sizes: [ 4, 6, 8 ]
   };
 
@@ -78,9 +78,15 @@ Hooks.once("init", async function() {
     if (typeof selected !== 'undefined') {
       selected.forEach(selected_value => {
         if (selected_value !== false) {
-          const escapedValue = RegExp.escape(Handlebars.escapeExpression(selected_value));
-          const rgx = new RegExp(' value=\"' + escapedValue + '\"');
-          html = html.replace(rgx, "$& checked=\"checked\"");
+          let escapedValue = RegExp.escape(Handlebars.escapeExpression(selected_value));
+          let rgx = new RegExp(' value=\"' + escapedValue + '\"');
+          let oldHtml = html;
+          html = html.replace(rgx, "$& checked");
+          while( ( oldHtml === html ) && ( escapedValue >= 0 ) ){
+            escapedValue--;
+            rgx = new RegExp(' value=\"' + escapedValue + '\"');
+            html = html.replace(rgx, "$& checked");
+          }
         }
       });
     }
@@ -102,7 +108,7 @@ Hooks.once("init", async function() {
     if (count > 4) count = 4;
 
     const rgx = new RegExp(' value=\"' + count + '\"');
-    return html.replace(rgx, "$& checked=\"checked\"");
+    return html.replace(rgx, "$& checked");
 
   });
 
@@ -129,16 +135,16 @@ Hooks.once("init", async function() {
   // Recovery harm card
   Handlebars.registerHelper('recovery_harm_card', (actor, options) => {
     let html = "";
-    const data = actor.data.root;
+    const sheetData = actor.system;
+    const recovery = sheetData.recovery;
 
-    const recovery = data.data.recovery;
     if(!recovery) return html; //No need to continue if there's no recovery data
 
-    const recovery_card = data.items.find(i => i._id === recovery.harmId && i.type === "harm_card")
+    const recovery_card = actor.items.find(i => i._id === recovery.harmId && i.type === "harm_card")
     if(!recovery_card) return html; //No need to continue if there is no harm card in recovery
 
     html += '<div class="item-body flex-horizontal">'  
-    html += `<div class="item-name tooltip">${recovery_card.name}<span class="tooltiptext">${recovery_card.data.description}</span></div>`
+    html += `<div class="item-name tooltip">${recovery_card.name}<span class="tooltiptext">${recovery_card.system.description}</span></div>`
     html += '</div>'
     if (recovery.clock === 0 || (recovery.clock == recovery.progress)){
       html += `<a class="item-control item-delete" title="${game.i18n.localize('WOD.Recovery.TitleCompleteRecovery')}"><i class="fas fa-trash"></i></a>`;
@@ -150,12 +156,9 @@ Hooks.once("init", async function() {
 
 
   // Has harm handlebar
-  Handlebars.registerHelper('has_harm', (actor) =>{
-    if(actor.items){
-      const harmlist = actor.items.filter(i => i.type === "harm_card") || [];
-      return harmlist.length > 0;
-    }
-    return false;
+  Handlebars.registerHelper('has_harm', (items) =>{
+    const harmlist = items.filter(i => i.type === "harm_card") || [];
+    return harmlist.length > 0;
   });  
 
   // Recover over next interval handlebar
@@ -166,36 +169,36 @@ Hooks.once("init", async function() {
 
   // Is in recovery handlebar
   Handlebars.registerHelper('in_recovery', (actor) =>{
-    const data = actor.data.root || actor.data;      
-    if(!data.recovery) return false;
-    if(data.recovery.harmId) return true;
+    const sheetData = actor.system;   
+    if(!sheetData.recovery) return false;
+    if(sheetData.recovery.harmId) return true;
     return false;
   });  
 
   // Is not in recovery handlebar
   Handlebars.registerHelper('not_in_recovery', (actor) =>{
-    const data = actor.data.root || actor.data;      
-    if(!data.recovery) return true;
-    if(data.recovery.harmId) return false;
+    const sheetData = actor.system;
+    if(!sheetData.recovery) return true;
+    if(sheetData.recovery.harmId) return false;
     return true;
   });
 
   // Has projects handlebar
   Handlebars.registerHelper('has_projects', (actor) =>{
-    const data = actor.data.root || actor.data;
-    if(data.projects){
-      return Object.keys(data.projects).length > 0;
+    const sheetData = actor.system;
+    if(sheetData.projects){
+      return Object.keys(sheetData.projects).length > 0;
     }
     return false;
   });
 
   // Has projects handlebar
   Handlebars.registerHelper('projectcounter', (actor) =>{
-    const data = actor.data.root || actor.data;
-    if(data.projects){
-      return Object.keys(data.projects).length;
+    const sheetData = actor.system;
+    if(sheetData.projects){
+      return Object.keys(sheetData.projects).length;
     }
-    return false;
+    return 0;
   });  
 
   // NotEquals handlebar.
@@ -215,7 +218,7 @@ Hooks.once("init", async function() {
 
     for (let i = 13 - turfs_amount_int; i <= 12; i++) {
       const rgx = new RegExp(' value=\"' + i + '\"');
-      html = html.replace(rgx, "$& disabled=\"disabled\"");
+      html = html.replace(rgx, "$& disabled");
     }
     return html;
   });
@@ -225,18 +228,18 @@ Hooks.once("init", async function() {
     let html = options.fn(this);
     for (let i = 1; i <= max_coins; i++) {
 
-      html += "<input type=\"radio\" id=\"crew-coins-vault-" + i + "\" name=\"data.vault.value\" value=\"" + i + "\"><label for=\"crew-coins-vault-" + i + "\"></label>";
+      html += "<input type=\"radio\" id=\"crew-coins-vault-" + i + "\" data-dType=\"Number\" name=\"system.vault.value\" value=\"" + i + "\"><label for=\"crew-coins-vault-" + i + "\"></label>";
     }
 
     return html;
   });
 
-  Handlebars.registerHelper('crew_experience', (actor, options) => {
+  Handlebars.registerHelper('crew_experience', (_id, options) => {
 
     let html = options.fn(this);
     for (let i = 1; i <= 10; i++) {
 
-      html += `<input type="radio" id="crew-${actor._id}-experience-${i}" name="data.experience" value="${i}" dtype="Radio"><label for="crew-${actor._id}-experience-${i}"></label>`;
+      html += `<input type="radio" id="crew-${_id}-experience-${i}" data-dType="Number" name="system.experience" value="${i}" dtype="Radio"><label for="crew-${_id}-experience-${i}"></label>`;
     }
 
     return html;
@@ -363,7 +366,7 @@ Hooks.once("init", async function() {
   Handlebars.registerHelper('blades-character-project-clock', function(type, current_value, project_id) {
 
     let html = '';
-    let parameter_name = `data.projects.${project_id}.progress`;
+    let parameter_name = `system.projects.${project_id}.progress`;
     let uniq_id = project_id;
 
     if (current_value === null || current_value === 'null') {
@@ -378,13 +381,13 @@ Hooks.once("init", async function() {
     html += `<label class="clock-zero-label" for="clock-0-${uniq_id}}"><i class="fab fa-creative-commons-zero nullifier"></i></label>`;
     html += `<div id="blades-clock-${uniq_id}" class="blades-clock clock-${type} clock-${type}-${current_value}" style="background-image:url('systems/winter-of-discontent/styles/assets/progressclocks-svg/Progress Clock ${type}-${current_value}.svg');">`;
 
-    let zero_checked = (parseInt(current_value) === 0) ? 'checked="checked"' : '';
-    html += `<input type="radio" value="0" id="clock-0-${uniq_id}}" name="${parameter_name}" ${zero_checked}>`;
+    let zero_checked = (parseInt(current_value) === 0) ? 'checked' : '';
+    html += `<input type="radio" value="0" id="clock-0-${uniq_id}}" data-dType="String" name="${parameter_name}" ${zero_checked}>`;
 
     for (let i = 1; i <= parseInt(type); i++) {
-      let checked = (parseInt(current_value) === i) ? 'checked="checked"' : '';
+      let checked = (parseInt(current_value) === i) ? 'checked' : '';
       html += `
-        <input type="radio" value="${i}" id="clock-${i}-${uniq_id}" name="${parameter_name}" ${checked}>
+        <input type="radio" value="${i}" id="clock-${i}-${uniq_id}" data-dType="String" name="${parameter_name}" ${checked}>
         <label for="clock-${i}-${uniq_id}"></label>
       `;
     }
@@ -422,9 +425,6 @@ Hooks.on("renderSceneControls", async (app, html) => {
   dice_roller.click( async function() {
     await simpleRollPopup();
   });
-  if ( !foundry.utils.isNewerVersion("9", game.version ?? game.data.version) ) {
-    html.children().first().append( dice_roller );
-  } else {
-    html.append( dice_roller );
-  }
+  html.children().first().append( dice_roller );
+
 });

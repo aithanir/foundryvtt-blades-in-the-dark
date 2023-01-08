@@ -10,14 +10,14 @@ export class BladesActor extends Actor {
   /** @override */
   static async create(data, options={}) {
 
-    data.token = data.token || {};
+    data.prototypeToken = data.prototypeToken || {};
 
     // For Crew and Character set the Token to sync with charsheet.
     switch (data.type) {
       case 'character':
       case 'crew':
       case '\uD83D\uDD5B clock':
-        data.token.actorLink = true;
+        data.prototypeToken.actorLink = true;
         break;
     }
 
@@ -26,11 +26,11 @@ export class BladesActor extends Actor {
 
   /** @override */
   getRollData() {
-    const data = super.getRollData();
+    const rollData = super.getRollData();
 
-    data.dice_amount = this.getAttributeDiceToThrow();
+    rollData.dice_amount = this.getAttributeDiceToThrow();
 
-    return data;
+    return rollData;
   }
 
   /* -------------------------------------------- */
@@ -41,10 +41,10 @@ export class BladesActor extends Actor {
 
     // Calculate Dice to throw.
     let dice_amount = {};
-    for (var attribute_name in this.data.data.attributes) {
+    for (const attribute_name in this.system.attributes) {
       dice_amount[attribute_name] = 0;
-      for (var skill_name in this.data.data.attributes[attribute_name].skills) {
-        dice_amount[skill_name] = parseInt(this.data.data.attributes[attribute_name].skills[skill_name]['value'][0])
+      for (const skill_name in this.system.attributes[attribute_name].skills) {
+        dice_amount[skill_name] = parseInt(this.system.attributes[attribute_name].skills[skill_name]['value'][0])
 
         // We add a +1d for every skill higher than 0.
         if (dice_amount[skill_name] > 0) {
@@ -64,7 +64,7 @@ export class BladesActor extends Actor {
     // const roll = new Roll("1d20 + @abilities.wis.mod", actor.getRollData());
     let attribute_label = BladesHelpers.getAttributeLabel(attribute_name);
 
-    var content = `
+    let content = `
         <h2>${game.i18n.localize('BITD.Roll')} ${game.i18n.localize(attribute_label)}</h2>
         <form>
           <div class="form-group">
@@ -103,7 +103,7 @@ export class BladesActor extends Actor {
         </div><br/>
         </form>
       `;
-    
+
     new Dialog({
       title: `${game.i18n.localize('BITD.Roll')} ${game.i18n.localize(attribute_label)}`,
       content: content,
@@ -130,7 +130,7 @@ export class BladesActor extends Actor {
   }
 
   /* -------------------------------------------- */
-  
+
   async rollAttribute(attribute_name = "", additional_dice_amount = 0, position, effect, note) {
 
     let dice_amount = 0;
@@ -153,27 +153,27 @@ export class BladesActor extends Actor {
    *  which can be performed.
    */
   createListOfActions() {
-  
+
     let text, attribute, skill;
-    let attributes = this.data.data.attributes;
-  
+    let attributes = this.system.attributes;
+
     for ( attribute in attributes ) {
-  
-      var skills = attributes[attribute].skills;
-  
+
+      const skills = attributes[attribute].skills;
+
       text += `<optgroup label="${attribute} Actions">`;
       text += `<option value="${attribute}">${attribute} (Resist)</option>`;
-  
+
       for ( skill in skills ) {
         text += `<option value="${skill}">${skill}</option>`;
       }
-  
+
       text += `</optgroup>`;
-  
+
     }
-  
+
     return text;
-  
+
   }
 
   /* -------------------------------------------- */
@@ -183,20 +183,20 @@ export class BladesActor extends Actor {
    *
    * @param {int} rs
    *  Min die modifier
-   * @param {int} re 
+   * @param {int} re
    *  Max die modifier
    * @param {int} s
    *  Selected die
    */
   createListOfDiceMods(rs, re, s) {
-  
+
     var text = ``;
     var i = 0;
-  
+
     if ( s == "" ) {
       s = 0;
     }
-  
+
     for ( i  = rs; i <= re; i++ ) {
       var plus = "";
       if ( i >= 0 ) { plus = "+" };
@@ -204,12 +204,12 @@ export class BladesActor extends Actor {
       if ( i == s ) {
         text += ` selected`;
       }
-      
+
       text += `>${plus}${i}d</option>`;
     }
-  
+
     return text;
-  
+
   }
 
   /* -------------------------------------------- */
@@ -219,60 +219,64 @@ export class BladesActor extends Actor {
    */
 
   async startRecovery(itemId){
-    let recovery = this.data.data.recovery;
+    let recovery = this.system.recovery;
     if (!recovery) recovery = game.system.template.Actor.character.recovery;
 
-    const currentRecoveryCard = await this.getRecoveryCardId();
-    if(currentRecoveryCard){
-      console.warn(`Recovery: harmId ${currentRecoveryCard} is already in recovery`);
+    const currentRecoveryCardId = await this.getRecoveryCardId();
+    if(currentRecoveryCardId){
+      console.warn(`Recovery: harmId ${currentRecoveryCardId} is already in recovery`);
       return;
     }
 
-    let recovery_card = this.data.items.get(itemId);
+    let recovery_card = this.items.get(itemId);
     if(!recovery_card || recovery_card.type != "harm_card") return; //Skip if we can't find the item or it's not a harm_card
     
-    const treatment = recovery_card.data.data.treatment;
+    const treatment = recovery_card.system.treatment;
     if (!treatment) return;  //Skip if no treatment on item
 
     recovery.harmId = itemId;
     recovery.position = treatment.position ?? "controlled";
     recovery.clock = treatment.clock ?? 4;
     recovery.progress = 0;
-    await this.update({"data.recovery": recovery},{"diff":false});
+    await this.update({"system.recovery": recovery},{"diff":false});
   }
 
   async getRecoveryCardId(){
-    let recovery = this.data.data.recovery;
-    let recovery_card = this.data.items.get(recovery.harmdId);
+    let recovery = this.system.recovery;
+    let recovery_card = this.items.get(recovery.harmId);
     if(!recovery_card || recovery_card.type != "harm_card"){
-      await this.update({"data.recovery": game.system.template.Actor.character.recovery});
+      await this.update({"system.recovery": game.system.template.Actor.character.recovery});
     }
-    return recovery.hardId
+    return recovery.harmId
   }
 
   async cancelRecovery(){
-      await this.update({"data.recovery": game.system.template.Actor.character.recovery});
+      await this.update({"system.recovery": game.system.template.Actor.character.recovery});
   }
 
 
   async addProject(project){
-    let projects = this.data.data.projects
+    let sheetData = this.system
+    let projects = sheetData.projects
+
     if (!projects || Array.isArray(projects)) projects = {};
 
     project._id = foundry.utils.randomID()
     projects[project._id] = project
-    await this.update({"data.projects": projects});
+    await this.update({"system.projects": projects});
     console.log(`Project ${project._id} added`)
   }
 
   //TODO: Find correct way to remove a project
   //   Currently using a hack of non-recursive update to update all data.
   async removeProject(id){
-    let data = this.data.data
-    if (!data.projects || Array.isArray(data.projects)) data.projects = {};
+    let sheetData = this.system;
+    let projects = sheetData.projects;
+    if (!projects || Array.isArray(projects)) projects = {};
 
-    delete data.projects[id];
-    await this.update({"data": data},{"diff":false,"recursive":false});
+    delete projects[id];
+    sheetData.projects = projects;
+    await this.update({"system": sheetData},{"diff":false,"recursive":false});
     console.log(`Project ${id} removed`)
   }
 }

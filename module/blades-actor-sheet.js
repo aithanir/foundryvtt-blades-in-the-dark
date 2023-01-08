@@ -22,35 +22,34 @@ export class BladesActorSheet extends BladesSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
-    var data = super.getData();
-    data.editable = this.options.editable;
-    data.isGM = game.user.isGM;
-    const actorData = data.data;
-    data.actor = actorData;
-    data.data = actorData.data;
+  async getData(options) {
+    const superData = super.getData( options );
+    const sheetData = superData.data;
+    sheetData.owner = superData.owner;
+    sheetData.editable = superData.editable;
+    sheetData.isGM = game.user.isGM;
 
     // Prepare active effects
-    data.effects = BladesActiveEffect.prepareActiveEffectCategories(this.actor.effects);
+    sheetData.effects = BladesActiveEffect.prepareActiveEffectCategories(this.actor.effects);
 
 
     // Note any ability that affect actor data
     // @todo - fix translation.
     let mule_present, enhanced_injury_limit, enhanced_shock_limit;
-
-
-    data.items.forEach(i => {
+    sheetData.items.forEach(i => {
       if (i.type == "ability"){
         if (i.name == "(C) Mule") {mule_present = true;}
         if (i.name == "Bound in Darkness") {enhanced_shock_limit = true;}
       }
     });
 
+
     // Calculate Load
     let loadout = 0;
-    data.items.forEach(i => {loadout += (i.type === "item") ? parseInt(i.data.load) : 0});
-    data.data.loadout = loadout;
-    
+    sheetData.items.forEach(i => {loadout += (i.type === "item") ? parseInt(i.system.load) : 0});
+    sheetData.system.loadout = loadout;
+    sheetData.system.load_levels={"BITD.Light":"BITD.Light", "BITD.Normal":"BITD.Normal", "BITD.Heavy":"BITD.Heavy"};
+   
     // Encumbrance Levels
     let load_level=["BITD.Light","BITD.Light","BITD.Light","BITD.Light","BITD.Normal","BITD.Normal","BITD.Heavy","BITD.Encumbered",
 			"BITD.Encumbered","BITD.Encumbered","BITD.OverMax"];
@@ -65,16 +64,12 @@ export class BladesActorSheet extends BladesSheet {
       loadout = 10;
     }
 
-
-
     //set encumbrance level
     if (mule_present) {
-      data.data.load_level=mule_level[loadout];
+      sheetData.system.load_level=mule_level[loadout];
     } else {
-      data.data.load_level=load_level[loadout];   
+      sheetData.system.load_level=load_level[loadout];
     }
-    
-    data.load_levels = {"BITD.Light":"BITD.Light", "BITD.Normal":"BITD.Normal", "BITD.Heavy":"BITD.Heavy"};
 
 
 
@@ -85,37 +80,57 @@ export class BladesActorSheet extends BladesSheet {
     let shock_max = enhanced_shock_limit ? 5 : 4;
 
     let harm = {}
-    data.items.forEach(i =>{
+    sheetData.items.forEach(i =>{
       if( i.type !== "harm_card") return;
-      injury += parseInt(i.data.injury_value);
-      shock += parseInt(i.data.shock_value);
+      injury += parseInt(i.system.injury_value);
+      shock += parseInt(i.system.shock_value);
     });
 
     // Sanity Check - Ensure injury/shock values are within expected range
     if (injury < 0) { injury=0;}
     if (injury > injury_max) { injury=injury_max;}
-    data.data.harm.injury = String(injury);
-    data.data.injury_max = injury_max;
+    sheetData.system.injury_max = injury_max;
 
     if (shock < 0) { shock=0;}
     if (shock > shock_max) { shock=shock_max;}
-    data.data.harm.shock = String(shock);
-    data.data.shock_max = shock_max;
-
+    sheetData.system.shock_max = shock_max;
+    sheetData.system.harm = {injury:injury,shock:shock};
+    
     // Sanity Check - Ensure recovery details match the recovery_card
     //                Reset recovery if the card is missing or not a harm_card
-    let recovery = {...data.data.recovery};
-    let recovery_card = data.items.find(i => i._id === recovery.harmId && i.type === "harm_card")
+    let recovery = {...sheetData.system.recovery};
+    let recovery_card = sheetData.items.find(i => i._id === recovery.harmId && i.type === "harm_card")
     if(recovery_card){
-      let treatment = recovery_card.data.treatment;
+      let treatment = recovery_card.system.treatment;
       recovery.position = treatment.position;
       recovery.clock = treatment.clock;
     }else{
       recovery = game.system.template.Actor.character.recovery;
     }
-    data.data.recovery = recovery;
+    sheetData.system.recovery = recovery;
 
-    return data;
+    // Sanity Check Projects - Strip out any projects without expected properties.
+    let projects = sheetData.system.projects;
+    let sanitizedProjects = {}
+    if (!projects || Array.isArray(projects)) projects = {};
+
+    Object.entries(projects).forEach(([key,project]) =>{
+      let keep = true;
+      if(!key) keep = false;
+      if(!project.hasOwnProperty("_id")) keep = false;
+      if(!project.hasOwnProperty("clock")) keep = false;      
+      if(!project.hasOwnProperty("progress")) keep = false;  
+      project.description = project.description || "Pet Project"
+
+      if(keep) sanitizedProjects[key] = project;
+    })
+    sheetData.system.projects = sanitizedProjects;
+
+
+    // set description
+    sheetData.system.description = await TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
+    
+    return sheetData;
   }
 
   /* -------------------------------------------- */

@@ -40,16 +40,16 @@ export class BladesSheet extends ActorSheet {
 
     items.forEach(e => {
       let addition_price_load = ``;
-      
-      if (typeof e.data.load !== "undefined") {
-        addition_price_load += `(${e.data.load})`
-      } else if (typeof e.data.price !== "undefined") {
-        addition_price_load += `(${e.data.price})`
+
+      if (typeof e.system.load !== "undefined") {
+        addition_price_load += `(${e.system.load})`
+      } else if (typeof e.system.price !== "undefined") {
+        addition_price_load += `(${e.system.price})`
       }
 
       html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
       html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-      html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
+      html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.system.description)}</span></i>`;
       html += `</label>`;
     });
 
@@ -58,7 +58,7 @@ export class BladesSheet extends ActorSheet {
     let options = {
       // width: "500"
     }
-    
+
     let dialog = new Dialog({
       title: `${game.i18n.localize('Add')} ${item_type}`,
       content: html,
@@ -79,7 +79,7 @@ export class BladesSheet extends ActorSheet {
 
     dialog.render(true);
   }
-  
+
   /* -------------------------------------------- */
 
   async addItemsToSheet(item_type, el) {
@@ -101,17 +101,17 @@ export class BladesSheet extends ActorSheet {
     let html = `<div class="project-to-add">`;
     html += `<hr/>`
         
-    html += `<input type="text" id="${this.actor.data._id}-new-project-description" name="project-description" placeholder="New Project" value="">`
-    html += `<label class="flex-horizontal" for="${this.actor.data._id}-new-project-description">${game.i18n.localize('WOD.Projects.SetDescription')}<label>`;
+    html += `<input type="text" id="${this.actor._id}-new-project-description" name="project-description" placeholder="New Project" value="">`
+    html += `<label class="flex-horizontal" for="${this.actor._id}-new-project-description">${game.i18n.localize('WOD.Projects.SetDescription')}<label>`;
 
     html += `<br/><br/>`
 
-    html += `<select data-type="Number" id="${this.actor.data._id}-new-project-type" name="project-type">`
+    html += `<select data-type="Number" id="${this.actor._id}-new-project-type" name="project-type">`
     html += `<option value="4" selected>4</option>`
     html += `<option value="6">6</option>`
     html += `<option value="8">8</option>`
     html += `</select>`
-    html += `&nbsp;<label class="flex-horizontal" for="${this.actor.data._id}-new-project-type">${game.i18n.localize('WOD.Projects.SetType')}<label>`;
+    html += `&nbsp;<label class="flex-horizontal" for="${this.actor._id}-new-project-type">${game.i18n.localize('WOD.Projects.SetType')}<label>`;
 
     html += `<hr/>`
     html += "</div>"
@@ -144,7 +144,7 @@ export class BladesSheet extends ActorSheet {
     /* -------------------------------------------- */
 
   async addProjectToSheet(el) {
-    let d = el.find(`#${this.actor.data._id}-new-project-description`);
+    let d = el.find(`#${this.actor._id}-new-project-description`);
     let t = el.find("option:selected");
     d = d?.val() || "New project";
     t = t?.val() || 4;
@@ -154,7 +154,7 @@ export class BladesSheet extends ActorSheet {
 
   /**
    * Roll an Attribute die.
-   * @param {*} event 
+   * @param {*} event
    */
   async _onRollAttributeDieClick(event) {
 
@@ -170,25 +170,25 @@ export class BladesSheet extends ActorSheet {
     const item_id = $(event.currentTarget).data("item");
     var update_value = $(event.currentTarget).data("value");
       const update_type = $(event.currentTarget).data("utype");
-      if ( update_value == undefined) {
+      if ( update_value === undefined) {
       update_value = document.getElementById('fac-' + update_type + '-' + item_id).value;
     };
     var update;
-    if ( update_type == "status" ) {
-      update = {_id: item_id, data:{status:{value: update_value}}};
+    if ( update_type === "status" ) {
+      update = {_id: item_id, system:{status:{value: update_value}}};
     }
     else if (update_type == "hold") {
-      update = {_id: item_id, data:{hold:{value: update_value}}};
+      update = {_id: item_id, system:{hold:{value: update_value}}};
     } else {
       console.log("update attempted for type undefined in blades-sheet.js onUpdateBoxClick function");
       return;
     };
 
     await this.actor.updateEmbeddedDocuments("Item", [update]);
-    
-     
+
+
     }
-  
+
   /* -------------------------------------------- */
 
 }
