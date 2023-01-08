@@ -7,9 +7,12 @@
     "minimum": 10,
     "verified": "10.284"
   },
-  "templateVersion": 1,
+  "url": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/tree/winter-of-discontent/",
+  "manifest": "https://raw.githubusercontent.com/aithanir/foundryvtt-blades-in-the-dark/winter-of-discontent/system.json",
+  "download": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/archive/wod-4.3-0.11.zip",
   "authors": [
     { "name": "megastruktur" },
+    { "name": "drewg13" },    
     { "name": "aithanir"}
   ],
   "esmodules": [
@@ -25,9 +28,6 @@
       "path": "lang/en.json"
     }
   ],
-  "url": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/tree/winter-of-discontent/",
-  "manifest": "https://raw.githubusercontent.com/aithanir/foundryvtt-blades-in-the-dark/winter-of-discontent/system.json",
-  "download": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/archive/wod-3.19-0.11.zip",
   "packs": [
     {
       "name": "class",
