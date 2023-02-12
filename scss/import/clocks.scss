@@ -17,6 +17,31 @@
   &.clocks-8 {
     @include clock(8, 200);
   }
+  &.clocks-1 {
+    @include clock(1, 200);
+    .blades-clock label {
+      top: 0;
+      right:0;
+    }    
+  }
+  &.clocks-2 {
+    @include clock(2, 200);
+    .blades-clock label {
+      top: 0;
+    }
+    .blades-clock *:nth-child(5) {
+      right: 50%  
+    }    
+  }
+  &.clocks-3 {
+    @include clock(3, 200);
+  } 
+  &.clocks-5 {
+    @include clock(5, 200);
+  }
+  &.clocks-7 {
+    @include clock(7, 200);
+  }           
 }
 
 .blades-clock-name-type {

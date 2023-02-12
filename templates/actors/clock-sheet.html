@@ -6,9 +6,18 @@
 
         <select data-type="String" name="system.type">
             {{#select system.type}}
-            <option value="4">4</option>
-            <option value="6">6</option>
-            <option value="8">8</option>
+            <optgroup>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>                  
+            </optgroup>
+            <optgroup label="-- Exotic Clocks --">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>  
+                <option value="5">5</option>
+                <option value="7">7</option>                 
+            </optgroup>
             {{/select}}
         </select>
         {{/if}}
