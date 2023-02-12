@@ -2,14 +2,14 @@
   "id": "winter-of-discontent",
   "title": "Winter of Discontent",
   "description": "A Forged in the Dark hack.",
-  "version": "wod-4.3-0.11",
+  "version": "wod-4.3-0.12",
   "compatibility": {
     "minimum": 10,
-    "verified": "10.284"
+    "verified": "10.291"
   },
   "url": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/tree/winter-of-discontent/",
   "manifest": "https://raw.githubusercontent.com/aithanir/foundryvtt-blades-in-the-dark/winter-of-discontent/system.json",
-  "download": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/archive/wod-4.3-0.11.zip",
+  "download": "https://github.com/aithanir/foundryvtt-blades-in-the-dark/archive/wod-4.3-0.12.zip",
   "authors": [
     { "name": "megastruktur" },
     { "name": "drewg13" },    
